@@ -2,5 +2,12 @@ import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import { App } from './app';
+import { Firebase, FirebaseContext } from './firebase/Firebase';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const firebase = Firebase.initialiseWithLocalConfig();
+ReactDOM.render(
+  <FirebaseContext.Provider value={firebase}>
+    <App />
+  </FirebaseContext.Provider>,
+  document.getElementById('root')
+);

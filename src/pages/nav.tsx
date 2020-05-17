@@ -1,16 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FirebaseContext } from '../firebase/Firebase';
 
-interface NavProps {
-  logged: boolean;
-}
-
-export const Nav: FC<NavProps> = (props: NavProps) => {
+export const Nav: FC<{ user: firebase.User | null }> = ({ user }) => {
+  const firebase = useContext(FirebaseContext);
   return (
     <nav className='flex justify-between'>
       <Link to='/'>Home</Link>
-      <Link to='/login'>Log In</Link>
-      <p>you are {props.logged ? 'logged in' : 'not logged in'}</p>
+      <p>
+        you are {user ? `logged in as ${user.displayName}` : 'not logged in'}
+      </p>
+      {user ? (
+        <button onClick={() => firebase.logout()}>log out</button>
+      ) : (
+        <Link to='/login'>Log In</Link>
+      )}
     </nav>
   );
 };
