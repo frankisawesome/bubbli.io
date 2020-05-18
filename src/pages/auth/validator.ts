@@ -1,4 +1,4 @@
-import { NameToStringMap } from '../../components/useFormValidation';
+import { NameToStringMap } from '../../hooks/useFormValidation';
 
 export const validator = (fields: NameToStringMap): NameToStringMap | null => {
   let errors: NameToStringMap = {};

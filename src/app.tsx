@@ -13,7 +13,7 @@ export const App: FC = () => {
     <Router>
       <Nav user={user}></Nav>
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' component={() => <Home user={user} />} />
         <Route path='/login' component={LoginRegisterForm} />
       </Switch>
     </Router>

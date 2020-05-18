@@ -76,7 +76,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
 
         <div className='flex'>
           <button
-            onClick={handleSubmit}
+            onMouseDown={handleSubmit}
             disabled={isSubmitting}
             style={{ background: isSubmitting ? 'grey' : 'orange' }}
           >
@@ -85,7 +85,6 @@ export const LoginRegisterForm: FC<any> = (props) => {
 
           <button
             type='button'
-            className='pointer button'
             onClick={() =>
               setForm((old) => (old === 'login' ? 'register' : 'login'))
             }

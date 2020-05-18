@@ -1,5 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import Firebase from 'firebase';
 
-export const Home: FC = () => {
-  return <div>Home page 1, 2, 3</div>;
+export const Home: FC<{ user: Firebase.User | null }> = ({ user }) => {
+  return user ? (
+    <div>{JSON.stringify(user)}</div>
+  ) : (
+    <div>Welcome, please log in</div>
+  );
 };
