@@ -18,6 +18,19 @@ export const ElementEditor: FC<{ user: Firebase.User }> = ({ user }) => {
     uid: user.uid,
     elements: [],
   });
+  const [saveMessage, setSaveMessage] = useState<string | null>();
+
+  useEffect(() => {
+    firebase.db
+      .collection('portfolios')
+      .doc(user.uid)
+      .onSnapshot((snapshot) => {
+        const data = snapshot.data() as Portfolio;
+        if (data) {
+          setPortfolio(data);
+        }
+      });
+  }, []);
 
   function handleAddElement() {
     setPortfolio((prev) => {
@@ -54,6 +67,16 @@ export const ElementEditor: FC<{ user: Firebase.User }> = ({ user }) => {
     });
   }
 
+  function handleSave() {
+    firebase.db
+      .collection('portfolios')
+      .doc(user.uid)
+      .set(portfolio)
+      .then(() => setSaveMessage('Portfolio saved'))
+      .catch(() => setSaveMessage('Error saving'));
+    setTimeout(() => setSaveMessage(null), 5000);
+  }
+
   return (
     <div>
       {portfolio.elements !== [] ? (
@@ -68,7 +91,9 @@ export const ElementEditor: FC<{ user: Firebase.User }> = ({ user }) => {
       ) : (
         <p>No Elements!</p>
       )}
-      <button onClick={handleAddElement}>Add Element</button>
+      <button onClick={handleAddElement}>Add Element | </button>
+      <button onClick={handleSave}>| Save</button>
+      {saveMessage && <p>{saveMessage}</p>}
     </div>
   );
 };
