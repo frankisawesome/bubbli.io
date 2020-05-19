@@ -1,5 +1,6 @@
 import { Firebase } from '../firebase/Firebase';
-import { useEffect, useState } from 'react';
+import fb from 'firebase';
+import { useEffect, useState, createContext } from 'react';
 
 export const useAuth = (firebase: Firebase): firebase.User | null => {
   const [authUser, setAuthUser] = useState<firebase.User | null>(null);
@@ -15,3 +16,5 @@ export const useAuth = (firebase: Firebase): firebase.User | null => {
   }, []);
   return authUser;
 };
+
+export const UserContext = createContext<fb.User | null>(null);

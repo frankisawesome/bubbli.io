@@ -1,9 +1,11 @@
 import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FirebaseContext } from '../firebase/Firebase';
+import { UserContext } from '../hooks/useAuth';
 
-export const Nav: FC<{ user: firebase.User | null }> = ({ user }) => {
+export const Nav: FC = () => {
   const firebase = useContext(FirebaseContext);
+  const user = useContext(UserContext);
   return (
     <nav className='flex justify-between'>
       <Link to='/'>Home</Link>
@@ -11,7 +13,10 @@ export const Nav: FC<{ user: firebase.User | null }> = ({ user }) => {
         you are {user ? `logged in as ${user.displayName}` : 'not logged in'}
       </p>
       {user ? (
-        <button onClick={() => firebase.logout()}>log out</button>
+        <>
+          <Link to='/admin'>Admin</Link>
+          <button onClick={() => firebase.logout()}>log out</button>
+        </>
       ) : (
         <Link to='/login'>Log In</Link>
       )}
