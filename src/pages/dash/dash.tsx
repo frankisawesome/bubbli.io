@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 
 import Firebase from 'firebase';
 import { UserContext } from '../../hooks/useAuth';
+import { ElementEditor } from './elementEditor';
 
 export const UserDashboard = () => {
   const user: Firebase.User | null = useContext(UserContext);
@@ -19,7 +20,7 @@ export const UserDashboard = () => {
           <p>You haven't set a profile photo yet :(</p>
         )}
         <h1>Create some elements in your bio!</h1>
-        <button>Add new element</button>
+        <ElementEditor user={user} />
       </div>
     );
   } else {
