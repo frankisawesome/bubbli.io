@@ -33,8 +33,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
         ? await firebase.login({ email, password })
         : await firebase.register({ email, name, password });
     } catch (e) {
-      console.error(e.message);
-      setSubmissionError(e.message);
+      if (e.message === 'Request failed with status code 409') {
+        setSubmissionError('Use name chosen, try another one!');
+      }
     }
   }
   if (!user) {
@@ -44,13 +45,17 @@ export const LoginRegisterForm: FC<any> = (props) => {
 
         <form className='flex flex-col'>
           {form === 'register' && (
-            <input
-              onChange={handleChange}
-              name='name'
-              type='text'
-              placeholder='Your name'
-              value={values.name}
-            ></input>
+            <>
+              <input
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name='name'
+                type='text'
+                placeholder='Your name'
+                value={values.name}
+              ></input>
+              {errorMap && errorMap.name && <p>{errorMap?.name}</p>}
+            </>
           )}
 
           <input

@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import Axios from 'axios';
 
 interface UserProps {
   email: string;
@@ -30,6 +31,9 @@ export class Firebase {
   }
 
   async register({ email, name, password }: UserProps): Promise<any> {
+    await Axios.get(
+      `https://us-central1-airbiodotme.cloudfunctions.net/validateName?name=${name}`
+    );
     const newUser = await this.auth.createUserWithEmailAndPassword(
       email,
       password

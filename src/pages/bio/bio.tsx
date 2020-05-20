@@ -7,7 +7,11 @@ type BioParams = {
   name: string;
 };
 
-export const Bio: FC<RouteComponentProps<BioParams>> = (props) => {
+export const Bio: FC<
+  RouteComponentProps<BioParams> & {
+    toggleNav: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+> = (props) => {
   const name = props.match.params.name;
   const firebase = useContext(FirebaseContext);
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
@@ -25,10 +29,17 @@ export const Bio: FC<RouteComponentProps<BioParams>> = (props) => {
         }
       });
   }, []);
+
+  useEffect(() => {
+    props.toggleNav(false);
+    return () => props.toggleNav(true);
+  }, []);
   return (
     <div>
       {portfolio ? (
-        portfolio.bubbles.map((bubble) => <BubbleView bubble={bubble} />)
+        portfolio.bubbles.map((bubble) => (
+          <BubbleView key={bubble.url} bubble={bubble} />
+        ))
       ) : notFound ? (
         <h1>Bubble portfolio not found</h1>
       ) : (
