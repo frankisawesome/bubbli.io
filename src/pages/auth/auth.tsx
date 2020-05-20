@@ -32,7 +32,6 @@ export const LoginRegisterForm: FC<any> = (props) => {
       form === 'login'
         ? await firebase.login({ email, password })
         : await firebase.register({ email, name, password });
-      props.history.push('/');
     } catch (e) {
       console.error(e.message);
       setSubmissionError(e.message);

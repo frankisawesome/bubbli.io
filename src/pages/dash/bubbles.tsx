@@ -108,7 +108,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       ) : (
         <p>Loading portfolio</p>
       )}
-      <button onClick={handleAddElement}>Add Element | </button>
+      <button onClick={handleAddElement}>Add Bubble | </button>
       <button onClick={handleSave} disabled={!portfolio}>
         {isSubmitting ? '| Submitting' : '| Save'}
       </button>

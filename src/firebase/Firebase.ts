@@ -3,6 +3,7 @@ import { firebaseConfig } from './config';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 interface UserProps {
   email: string;
@@ -13,6 +14,7 @@ interface UserProps {
 export class Firebase {
   public auth: firebase.auth.Auth;
   public db: firebase.firestore.Firestore;
+  public storage: firebase.storage.Storage;
 
   constructor(config: Object) {
     if (!firebase.apps.length) {
@@ -20,6 +22,7 @@ export class Firebase {
     }
     this.auth = firebase.auth();
     this.db = firebase.firestore();
+    this.storage = firebase.storage();
   }
 
   public static initialiseWithLocalConfig(): Firebase {
