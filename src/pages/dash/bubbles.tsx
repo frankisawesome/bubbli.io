@@ -32,52 +32,66 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
 
   function handleAddElement() {
     setPortfolio((prev) => {
-      const bubbles = prev.bubbles;
-      bubbles.push({
-        title: '',
-        url: '',
-      });
-      return {
-        name: prev.name,
-        bubbles: bubbles,
-      };
+      if (prev) {
+        const bubbles = prev.bubbles;
+        bubbles.push({
+          title: '',
+          url: '',
+        });
+        return {
+          name: prev.name,
+          bubbles: bubbles,
+        };
+      } else {
+        return null;
+      }
     });
   }
 
   function handleDeleteElement(i: number) {
     setPortfolio((prev) => {
-      const bubbles = prev.bubbles;
-      bubbles.splice(i, 1);
-      return {
-        name: prev.name,
-        bubbles: bubbles,
-      };
+      if (prev) {
+        const bubbles = prev.bubbles;
+        bubbles.splice(i, 1);
+        return {
+          name: prev.name,
+          bubbles: bubbles,
+        };
+      } else {
+        return null;
+      }
     });
   }
 
   function handleOnChange(i: number, newEl: Bubble) {
     setPortfolio((prev) => {
-      prev.bubbles[i] = newEl;
-      return {
-        name: prev.name,
-        bubbles: prev.bubbles,
-      };
+      if (prev) {
+        prev.bubbles[i] = newEl;
+        return {
+          name: prev.name,
+          bubbles: prev.bubbles,
+        };
+      } else {
+        return null;
+      }
     });
   }
 
   function handleSave() {
-    setIsSubmitting(true);
-    firebase.db
-      .collection('portfolios')
-      .doc(user.uid)
-      .set(portfolio)
-      .then(() => setIsSubmitting(false))
-      .then(() => setSaveMessage('Portfolio saved'))
-      .catch(() => {
-        setSaveMessage('Error saving');
-        setIsSubmitting(false);
-      });
-    setTimeout(() => setSaveMessage(null), 5000);
+    if (portfolio) {
+      setIsSubmitting(true);
+      firebase.db
+        .collection('portfolios')
+        .doc(user.uid)
+        .set(portfolio)
+        .then(() => setIsSubmitting(false))
+        .then(() => setSaveMessage('Portfolio saved'))
+        .catch(() => {
+          setSaveMessage('Error saving');
+          setIsSubmitting(false);
+        });
+      setTimeout(() => setSaveMessage(null), 5000);
+    }
   }
 
   return (
