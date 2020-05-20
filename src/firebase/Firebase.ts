@@ -35,6 +35,10 @@ export class Firebase {
       await newUser.user.updateProfile({
         displayName: name,
       });
+      await this.db
+        .collection('portfolios')
+        .doc(newUser.user.uid)
+        .set({ name: name, bubbles: [] });
       return Promise.resolve();
     } else {
       return Promise.reject('Failed to register new user');

@@ -6,6 +6,7 @@ import { Home } from './pages/home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { FirebaseContext, Firebase } from './firebase/Firebase';
 import { UserDashboard } from './pages/dash/dash';
+import { Bio } from './pages/bio/bio';
 
 export const App: FC = () => {
   const firebase: Firebase = useContext(FirebaseContext);
@@ -18,6 +19,7 @@ export const App: FC = () => {
           <Route exact path='/' component={() => <Home />} />
           <Route path='/login' component={LoginRegisterForm} />
           <Route path='/admin' component={UserDashboard} />
+          <Route path='/:name' component={Bio} />
         </Switch>
       </Router>
     </UserContext.Provider>

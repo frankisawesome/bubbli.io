@@ -1,24 +1,22 @@
 import React, { FC, useState, useContext, useEffect } from 'react';
 import Firebase from 'firebase';
 import { FirebaseContext } from '../../firebase/Firebase';
-import { ElementView } from './elementView';
-interface Portfolio {
-  uid: string;
-  elements: Element[];
+import { BubbleEdit } from './bubbleEdit';
+export interface Portfolio {
+  name: string;
+  bubbles: Bubble[];
 }
 
-export interface Element {
+export interface Bubble {
   title: string;
   url: string;
 }
 
-export const ElementEditor: FC<{ user: Firebase.User }> = ({ user }) => {
+export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   const firebase = useContext(FirebaseContext);
-  const [portfolio, setPortfolio] = useState<Portfolio>({
-    uid: user.uid,
-    elements: [],
-  });
+  const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [saveMessage, setSaveMessage] = useState<string | null>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     firebase.db
@@ -34,65 +32,72 @@ export const ElementEditor: FC<{ user: Firebase.User }> = ({ user }) => {
 
   function handleAddElement() {
     setPortfolio((prev) => {
-      const elements = prev.elements;
-      elements.push({
+      const bubbles = prev.bubbles;
+      bubbles.push({
         title: '',
         url: '',
       });
       return {
-        uid: user.uid,
-        elements: elements,
+        name: prev.name,
+        bubbles: bubbles,
       };
     });
   }
 
   function handleDeleteElement(i: number) {
     setPortfolio((prev) => {
-      const elements = prev.elements;
-      elements.splice(i, 1);
+      const bubbles = prev.bubbles;
+      bubbles.splice(i, 1);
       return {
-        uid: user.uid,
-        elements: elements,
+        name: prev.name,
+        bubbles: bubbles,
       };
     });
   }
 
-  function handleOnChange(i: number, newEl: Element) {
+  function handleOnChange(i: number, newEl: Bubble) {
     setPortfolio((prev) => {
-      prev.elements[i] = newEl;
+      prev.bubbles[i] = newEl;
       return {
-        uid: user.uid,
-        elements: prev.elements,
+        name: prev.name,
+        bubbles: prev.bubbles,
       };
     });
   }
 
   function handleSave() {
+    setIsSubmitting(true);
     firebase.db
       .collection('portfolios')
       .doc(user.uid)
       .set(portfolio)
+      .then(() => setIsSubmitting(false))
       .then(() => setSaveMessage('Portfolio saved'))
-      .catch(() => setSaveMessage('Error saving'));
+      .catch(() => {
+        setSaveMessage('Error saving');
+        setIsSubmitting(false);
+      });
     setTimeout(() => setSaveMessage(null), 5000);
   }
 
   return (
     <div>
-      {portfolio.elements !== [] ? (
-        portfolio.elements.map((element, i) => (
-          <ElementView
-            element={element}
+      {portfolio ? (
+        portfolio.bubbles.map((bubble, i) => (
+          <BubbleEdit
+            bubble={bubble}
             index={i}
             handleDelete={handleDeleteElement}
             handleChange={handleOnChange}
           />
         ))
       ) : (
-        <p>No Elements!</p>
+        <p>Loading portfolio</p>
       )}
       <button onClick={handleAddElement}>Add Element | </button>
-      <button onClick={handleSave}>| Save</button>
+      <button onClick={handleSave} disabled={!portfolio}>
+        {isSubmitting ? '| Submitting' : '| Save'}
+      </button>
       {saveMessage && <p>{saveMessage}</p>}
     </div>
   );
