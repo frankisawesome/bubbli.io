@@ -43,7 +43,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
       <div>
         <h2 className='mv3'>{form === 'login' ? 'Login' : 'Create Account'}</h2>
 
-        <form className='flex flex-col'>
+        <form className='spaced-form'>
           {form === 'register' && (
             <>
               <input
@@ -51,6 +51,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
                 onBlur={handleBlur}
                 name='name'
                 type='text'
+                className={
+                  errorMap && errorMap.name ? 'form-input-error' : 'form-input'
+                }
                 placeholder='Your name'
                 value={values.name}
               ></input>
@@ -64,6 +67,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
             name='email'
             type='email'
             placeholder='Your email'
+            className={
+              errorMap && errorMap.email ? 'form-input-error' : 'form-input'
+            }
             value={values.email}
           ></input>
           {errorMap && errorMap.email && <p>{errorMap.email}</p>}
@@ -74,6 +80,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
             name='password'
             type='password'
             placeholder='Choose password'
+            className={
+              errorMap && errorMap.password ? 'form-input-error' : 'form-input'
+            }
             value={values.password}
           ></input>
           {errorMap && errorMap.password && (
@@ -85,7 +94,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
             <button
               onMouseDown={handleSubmit}
               disabled={isSubmitting}
-              style={{ background: isSubmitting ? 'grey' : 'orange' }}
+              className={
+                isSubmitting ? 'btn btn-blue-submitting' : 'btn btn-blue'
+              }
             >
               submit
             </button>
