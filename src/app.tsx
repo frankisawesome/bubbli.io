@@ -15,16 +15,18 @@ export const App: FC = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-        <Nav show={showNav}></Nav>
-        <Switch>
-          <Route exact path='/' component={() => <Home />} />
-          <Route path='/login' component={LoginRegisterForm} />
-          <Route path='/admin' component={UserDashboard} />
-          <Route
-            path='/:name'
-            render={(props) => <Bio {...props} toggleNav={setShowNav} />}
-          />
-        </Switch>
+        <div className='flex justify-center flex-col items-center'>
+          <Nav show={showNav}></Nav>
+          <Switch>
+            <Route exact path='/' component={() => <Home />} />
+            <Route path='/login' component={LoginRegisterForm} />
+            <Route path='/admin' component={UserDashboard} />
+            <Route
+              path='/:name'
+              render={(props) => <Bio {...props} toggleNav={setShowNav} />}
+            />
+          </Switch>
+        </div>
       </Router>
     </UserContext.Provider>
   );

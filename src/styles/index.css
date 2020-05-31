@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@responsive {
+  .normal-max-w {
+    width: 1050px;
+  }
+}
+
 .btn-blue {
   @apply bg-blue-500 text-white;
 }
@@ -27,4 +34,17 @@
 
 .form-input-error {
   @apply shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight;
+}
+
+.nav {
+  @apply flex justify-between px-1 py-1;
+}
+
+.nav-btn {
+  @apply border-solid border border-gray-700 py-2 px-2;
+  border-radius: 1rem;
+}
+
+.nav-btn:hover {
+  @apply bg-gray-700 text-white;
 }
