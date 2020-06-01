@@ -17,7 +17,7 @@ export const App: FC = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-        <div className='flex justify-start flex-col items-center h-full max-w-full'>
+        <div className='flex justify-start flex-col items-center min-h-screen max-w-full'>
           <Nav show={showNav}></Nav>
           <Switch>
             <Route exact path='/' component={() => <Home />} />

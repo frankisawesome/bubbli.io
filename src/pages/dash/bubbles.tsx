@@ -103,6 +103,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
             index={i}
             handleDelete={handleDeleteElement}
             handleChange={handleOnChange}
+            handleBlur={handleSave}
           />
         ))
       ) : (
@@ -110,13 +111,6 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       )}
       <button className='btn my-2' onClick={handleAddElement}>
         Create New Bubble
-      </button>
-      <button
-        className={`${isSubmitting ? 'btn-submitting btn' : 'btn'} my-2`}
-        onClick={handleSave}
-        disabled={!portfolio}
-      >
-        Save
       </button>
       {saveMessage && <p>{saveMessage}</p>}
     </div>

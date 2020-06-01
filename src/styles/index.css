@@ -56,11 +56,24 @@ button:focus {
   border-radius: 1rem;
 }
 
+.btn-alt-del {
+  @apply py-2 px-2 text-red-500;
+}
+
+.btn-alt-del:hover {
+  @apply bg-red-500 text-white;
+  border-radius: 1rem;
+}
+
 .btn-submitting {
   @apply bg-gray-500 text-white;
 }
 
 .form-label {
+}
+
+.form-input-disabled {
+  @apply text-gray-600 border-none max-w-sm w-5/6 px-2 py-2;
 }
 
 .form-input {
