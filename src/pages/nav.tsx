@@ -7,7 +7,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
   const firebase = useContext(FirebaseContext);
   const user = useContext(UserContext);
   return (
-    <nav className={`nav ${!show && 'hidden'} w-full lg:normal-max-w`}>
+    <nav className={`${show ? 'nav' : 'hidden'} w-full lg:normal-max-w`}>
       <Link to='/' className='nav-btn'>
         Home
       </Link>

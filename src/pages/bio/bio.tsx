@@ -35,16 +35,27 @@ export const Bio: FC<
     return () => props.toggleNav(true);
   }, []);
   return (
-    <div>
-      {portfolio ? (
-        portfolio.bubbles.map((bubble) => (
-          <BubbleView key={bubble.url} bubble={bubble} />
-        ))
-      ) : notFound ? (
-        <h1>Bubble portfolio not found</h1>
-      ) : (
-        <h1>Loading</h1>
-      )}
+    <div className='flex flex-col h-full justify-between w-full'>
+      <div className='w-full items-center flex flex-col'>
+        <h1 className='rounded-full border border-gray-600 px-4 py-1 text-3xl mt-4'>
+          b.
+        </h1>
+        <h1 className='text-2xl my-4'>{name}</h1>
+        {portfolio ? (
+          portfolio.bubbles.map((bubble) => (
+            <BubbleView key={bubble.url} bubble={bubble} />
+          ))
+        ) : notFound ? (
+          <h1>Bubbli bio not found for name {name}</h1>
+        ) : (
+          <h1>Loading</h1>
+        )}
+      </div>
+      <button className='mb-8'>
+        <a className='btn' href='https://bubbli.io'>
+          bubbli.io
+        </a>
+      </button>
     </div>
   );
 };

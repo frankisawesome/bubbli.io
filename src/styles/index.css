@@ -22,6 +22,15 @@ button:focus {
   border-radius: 1rem;
 }
 
+.bubble-lg {
+  @apply border-solid border border-gray-700 py-2 px-2 text-2xl;
+  border-radius: 1rem;
+}
+
+.bubble-lg:hover {
+  @apply bg-gray-700 text-white transition duration-300;
+}
+
 .bubble-hover {
   @apply bg-gray-700 text-white transition duration-300;
 }
@@ -59,7 +68,7 @@ button:focus {
 }
 
 .form-input-error {
-  @apply bubble border-red-500  max-w-sm w-5/6;
+  @apply bubble border-red-500 max-w-sm w-5/6;
 }
 
 .form-input-error {
