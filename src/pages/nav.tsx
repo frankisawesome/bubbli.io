@@ -11,7 +11,9 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
       <Link to='/' className='nav-btn'>
         Home
       </Link>
-      <h1 className='nav-btn'>bubbli.io</h1>
+      <Link to='/' className='nav-btn'>
+        bubbli.io
+      </Link>
       {user ? (
         <>
           <Link className='nav-btn' to='/admin'>

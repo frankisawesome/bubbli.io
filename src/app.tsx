@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { FirebaseContext, Firebase } from './firebase/Firebase';
 import { UserDashboard } from './pages/dash/dash';
 import { Bio } from './pages/bio/bio';
+import { Forgot } from './pages/forgot';
 
 export const App: FC = () => {
   const firebase: Firebase = useContext(FirebaseContext);
@@ -15,12 +16,13 @@ export const App: FC = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-        <div className='flex justify-start flex-col items-center h-full'>
+        <div className='flex justify-start flex-col items-center h-full max-w-full'>
           <Nav show={showNav}></Nav>
           <Switch>
             <Route exact path='/' component={() => <Home />} />
             <Route path='/login' component={LoginRegisterForm} />
             <Route path='/admin' component={UserDashboard} />
+            <Route path='/forgot' component={Forgot} />
             <Route
               path='/:name'
               render={(props) => <Bio {...props} toggleNav={setShowNav} />}

@@ -40,7 +40,7 @@ export const Bio: FC<
         <h1 className='rounded-full border border-gray-600 px-4 py-1 text-3xl mt-4'>
           b.
         </h1>
-        <h1 className='text-2xl my-4'>{name}</h1>
+        <h1 className='text-2xl my-4'>@{name}</h1>
         {portfolio ? (
           portfolio.bubbles.map((bubble) => (
             <BubbleView key={bubble.url} bubble={bubble} />
