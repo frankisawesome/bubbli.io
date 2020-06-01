@@ -3,43 +3,17 @@ import { Redirect } from 'react-router';
 import Firebase from 'firebase';
 import { UserContext } from '../../hooks/useAuth';
 import { Bubbles } from './bubbles';
-import { Upload } from '../../components/firebaseUpload';
-import { FirebaseContext } from '../../firebase/Firebase';
 
 export const UserDashboard = () => {
   const user: Firebase.User | null = useContext(UserContext);
-  const firebase = useContext(FirebaseContext);
-  const [photoUrl, setPhotoUrl] = useState<string | undefined>(undefined);
 
-  function handleDeletePhoto() {
-    firebase.storage
-      .ref(`users/${user?.uid}/profile.jpg`)
-      .delete()
-      .then(() => console.log('deleted'));
-    user?.updateProfile({ photoURL: null }).then(() => setPhotoUrl(undefined));
-  }
-
-  useEffect(() => {
-    if (user?.photoURL) {
-      firebase.storage
-        .ref(`users/${user.uid}/profile.jpg`)
-        .getDownloadURL()
-        .then((url) => setPhotoUrl(url));
-    }
-  }, [user, photoUrl]);
   if (user) {
     return (
-      <div>
-        <h1>Welcom to your dashboard, {user.displayName}</h1>
-        <p>Your email is: {user.email}</p>
-        {user.photoURL ? (
-          <div>
-            Your profile photo is: <img src={photoUrl}></img>
-            <button onClick={handleDeletePhoto}>Delete Photo</button>
-          </div>
-        ) : (
-          <Upload setPhotoUrl={setPhotoUrl} />
-        )}
+      <div className='page-card w-5/6 max-w-2xl'>
+        <h1 className='font-semibold text-3xl'>
+          Greetings, {user.displayName}
+        </h1>
+        <p className='my-4 text-xl'>Manage your bubbles</p>
         <Bubbles user={user} />
       </div>
     );

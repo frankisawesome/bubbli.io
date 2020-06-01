@@ -95,7 +95,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   }
 
   return (
-    <div>
+    <div className='flex flex-col w-5/6 max-w-xl'>
       {portfolio ? (
         portfolio.bubbles.map((bubble, i) => (
           <BubbleEdit
@@ -108,9 +108,15 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       ) : (
         <p>Loading portfolio</p>
       )}
-      <button onClick={handleAddElement}>Add Bubble | </button>
-      <button onClick={handleSave} disabled={!portfolio}>
-        {isSubmitting ? '| Submitting' : '| Save'}
+      <button className='btn my-2' onClick={handleAddElement}>
+        Create New Bubble
+      </button>
+      <button
+        className={`${isSubmitting ? 'btn-submitting btn' : 'btn'} my-2`}
+        onClick={handleSave}
+        disabled={!portfolio}
+      >
+        Save
       </button>
       {saveMessage && <p>{saveMessage}</p>}
     </div>

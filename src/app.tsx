@@ -8,6 +8,7 @@ import { FirebaseContext, Firebase } from './firebase/Firebase';
 import { UserDashboard } from './pages/dash/dash';
 import { Bio } from './pages/bio/bio';
 import { Forgot } from './pages/forgot';
+import { Settings } from './pages/dash/settings';
 
 export const App: FC = () => {
   const firebase: Firebase = useContext(FirebaseContext);
@@ -23,6 +24,7 @@ export const App: FC = () => {
             <Route path='/login' component={LoginRegisterForm} />
             <Route path='/admin' component={UserDashboard} />
             <Route path='/forgot' component={Forgot} />
+            <Route path='/settings' component={Settings} />
             <Route
               path='/:name'
               render={(props) => <Bio {...props} toggleNav={setShowNav} />}
