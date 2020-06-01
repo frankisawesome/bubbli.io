@@ -15,8 +15,8 @@ export const validator = (fields: NameToStringMap): NameToStringMap | null => {
     errors.password = 'Password must be at least 6 characters';
   }
 
-  if (fields.name.length > 12) {
-    errors.name = 'Nick name must be under 12 characters';
+  if (fields.name.length > 20) {
+    errors.name = 'Nick name must be under 20 characters';
   }
 
   if (Object.keys(errors).length === 0) {

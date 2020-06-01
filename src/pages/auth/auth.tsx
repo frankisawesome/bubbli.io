@@ -34,16 +34,17 @@ export const LoginRegisterForm: FC<any> = (props) => {
         : await firebase.register({ email, name, password });
     } catch (e) {
       if (e.message === 'Request failed with status code 409') {
-        setSubmissionError('Use name chosen, try another one!');
+        setSubmissionError('User already exists!');
       }
     }
   }
   if (!user) {
     return (
-      <div>
-        <h2 className='mv3'>{form === 'login' ? 'Login' : 'Create Account'}</h2>
-
-        <form className='spaced-form'>
+      <div className='block mt-12 w-3/4 lg:w-1/2'>
+        <div className='flex flex-col items-center space-y-4 bubble'>
+          <h2 className='text-3xl font-semibold'>
+            {form === 'login' ? 'login' : 'create account'}
+          </h2>
           {form === 'register' && (
             <>
               <input
@@ -57,7 +58,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
                 placeholder='Your name'
                 value={values.name}
               ></input>
-              {errorMap && errorMap.name && <p>{errorMap?.name}</p>}
+              {errorMap && errorMap.name && (
+                <p className='font-bold'>{errorMap?.name}</p>
+              )}
             </>
           )}
 
@@ -72,7 +75,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
             }
             value={values.email}
           ></input>
-          {errorMap && errorMap.email && <p>{errorMap.email}</p>}
+          {errorMap && errorMap.email && (
+            <p className='font-bold'>{errorMap.email}</p>
+          )}
 
           <input
             onChange={handleChange}
@@ -86,17 +91,15 @@ export const LoginRegisterForm: FC<any> = (props) => {
             value={values.password}
           ></input>
           {errorMap && errorMap.password && (
-            <p className='error-text'>{errorMap.password}</p>
+            <p className='font-bold'>{errorMap.password}</p>
           )}
-          {submissionError && <p>{submissionError}</p>}
+          {submissionError && <p className='font-bold'>{submissionError}</p>}
 
-          <div className='flex'>
+          <div className='flex flex-col space-y-2'>
             <button
               onMouseDown={handleSubmit}
               disabled={isSubmitting}
-              className={
-                isSubmitting ? 'btn btn-blue-submitting' : 'btn btn-blue'
-              }
+              className={isSubmitting ? 'btn btn-submitting' : 'btn'}
             >
               submit
             </button>
@@ -106,15 +109,16 @@ export const LoginRegisterForm: FC<any> = (props) => {
               onClick={() =>
                 setForm((old) => (old === 'login' ? 'register' : 'login'))
               }
+              className='btn-alt'
             >
               {form === 'login'
                 ? 'need to create account? '
                 : 'already have an account?'}
             </button>
+            <Link className='btn-alt text-center' to='/forgot'>
+              forgot password?
+            </Link>
           </div>
-        </form>
-        <div>
-          <Link to='/forgot'>forgot password?</Link>
         </div>
       </div>
     );

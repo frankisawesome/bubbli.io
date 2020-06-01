@@ -8,32 +8,62 @@
   }
 }
 
-.btn-blue {
-  @apply bg-blue-500 text-white;
+body {
+  @apply box-content;
+  font-family: 'Quicksand', sans-serif;
 }
 
-.btn-blue-submitting {
-  @apply bg-gray-700 text-white;
+button:focus {
+  outline: 0;
+}
+
+.bubble {
+  @apply border-solid border border-gray-700 py-2 px-2;
+  border-radius: 1rem;
+}
+
+.bubble-hover {
+  @apply bg-gray-700 text-white transition duration-300;
 }
 
 .btn {
-  @apply font-bold py-2 px-4 rounded;
+  @apply bubble;
 }
 
-.spaced-form {
-  @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4;
+.btn:hover {
+  @apply bubble-hover;
+}
+
+.btn-alt {
+  @apply py-2 px-2;
+}
+
+.btn-alt:hover {
+  @apply bubble-hover;
+  border-radius: 1rem;
+}
+
+.btn-submitting {
+  @apply bg-gray-500 text-white;
 }
 
 .form-label {
-  @apply block text-gray-700 text-sm font-bold mb-2;
 }
 
 .form-input {
-  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+  @apply bubble max-w-sm w-5/6;
+}
+
+.form-input:focus {
+  outline: none;
 }
 
 .form-input-error {
-  @apply shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight;
+  @apply bubble border-red-500  max-w-sm w-5/6;
+}
+
+.form-input-error {
+  outline: none;
 }
 
 .nav {
@@ -41,10 +71,9 @@
 }
 
 .nav-btn {
-  @apply border-solid border border-gray-700 py-2 px-2;
-  border-radius: 1rem;
+  @apply bubble text-lg;
 }
 
 .nav-btn:hover {
-  @apply bg-gray-700 text-white;
+  @apply bubble-hover;
 }
