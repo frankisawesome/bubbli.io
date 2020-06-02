@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Bubble } from './bubbles';
+import { BubbleView } from '../bio/bubbleView';
 
 export const BubbleEdit: FC<{
   bubble: Bubble;
@@ -45,38 +46,48 @@ export const BubbleEdit: FC<{
       ${index !== modal && modal !== -1 && 'opacity-25'}
       `}
     >
-      <div className='w-full'>
-        <div className='max-w-md w-full'>
-          <label>title: </label>
-          <input
-            disabled={disabled}
-            className={`my-2 ${
-              disabled ? 'form-input-disabled' : 'form-input'
-            }`}
-            value={bubble.title}
-            onChange={(e) =>
-              handleChange(index, { url: bubble.url, title: e.target.value })
-            }
-            onBlur={handleBlur}
-          ></input>
+      {disabled ? (
+        <div className='w-full flex justify-center items-center'>
+          <h1 className='text-2xl'>{bubble.title}</h1>
         </div>
+      ) : (
+        <div className='w-full'>
+          <div className='max-w-md w-full'>
+            <label>title: </label>
+            <input
+              disabled={disabled}
+              className={`my-2 ${
+                disabled ? 'form-input-disabled' : 'form-input'
+              }`}
+              value={bubble.title}
+              onChange={(e) =>
+                handleChange(index, { url: bubble.url, title: e.target.value })
+              }
+              onBlur={handleBlur}
+            ></input>
+          </div>
 
-        <div className='max-w-md w-full'>
-          <label>link: </label>
-          <input
-            disabled={disabled}
-            className={`my-2 ${
-              disabled ? ' form-input-disabled' : 'form-input'
-            }`}
-            value={bubble.url}
-            onChange={(e) =>
-              handleChange(index, { url: e.target.value, title: bubble.title })
-            }
-            onBlur={handleBlur}
-          ></input>
+          <div className='max-w-md w-full'>
+            <label>link: </label>
+            <input
+              disabled={disabled}
+              className={`my-2 ${
+                disabled ? ' form-input-disabled' : 'form-input'
+              }`}
+              value={bubble.url}
+              onChange={(e) =>
+                handleChange(index, {
+                  url: e.target.value,
+                  title: bubble.title,
+                })
+              }
+              onBlur={handleBlur}
+            ></input>
+          </div>
         </div>
-      </div>
-      <div className='flex flex-col justify-center'>
+      )}
+
+      <div className={`${disabled ? 'flex' : 'flex flex-col justify-center'}`}>
         <button className='btn-alt my-2' onClick={() => handleEdit()}>
           {disabled ? 'Edit' : 'Back'}
         </button>
