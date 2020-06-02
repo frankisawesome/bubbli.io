@@ -35,11 +35,9 @@ export const Bio: FC<
     return () => props.toggleNav(true);
   }, []);
   return (
-    <div className='flex flex-col h-full justify-between w-full'>
+    <div className='flex flex-col h-screen justify-between w-full items-center'>
       <div className='w-full items-center flex flex-col'>
-        <h1 className='rounded-full border border-gray-600 px-4 py-1 text-3xl mt-4'>
-          b.
-        </h1>
+        <div className='w-24 h-24 rounded-full bg-gray-600 mt-6'></div>
         <h1 className='text-2xl my-4'>@{name}</h1>
         {portfolio ? (
           portfolio.bubbles.map((bubble) => (
@@ -51,11 +49,11 @@ export const Bio: FC<
           <h1>Loading</h1>
         )}
       </div>
-      <button className='mb-8'>
-        <a className='btn' href='https://bubbli.io'>
-          bubbli.io
-        </a>
-      </button>
+      <div>
+        <h1 className='rounded-full border border-gray-600 px-3-5 py-1 text-3xl text-white bg-gray-600 hover:bg-white hover:text-gray-600 transition duration-300 mb-6'>
+          <a href='/'>b.</a>
+        </h1>
+      </div>
     </div>
   );
 };

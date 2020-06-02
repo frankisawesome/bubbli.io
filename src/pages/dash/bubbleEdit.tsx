@@ -7,7 +7,17 @@ export const BubbleEdit: FC<{
   handleDelete: (i: number) => void;
   handleChange: (i: number, newEl: Bubble) => void;
   handleBlur: () => void;
-}> = ({ bubble, index, handleDelete, handleChange, handleBlur }) => {
+  setModal: (i: number) => void;
+  modal: number;
+}> = ({
+  bubble,
+  index,
+  handleDelete,
+  handleChange,
+  handleBlur,
+  setModal,
+  modal,
+}) => {
   const [disabled, setDisabled] = useState<boolean>(true);
 
   useEffect(() => {
@@ -15,8 +25,26 @@ export const BubbleEdit: FC<{
       setDisabled(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (!disabled) {
+      setModal(index);
+    } else {
+      setModal(-1);
+    }
+  }, [disabled]);
+
+  function handleEdit() {
+    setDisabled((prev) => !prev);
+  }
   return (
-    <div className='flex bubble my-2 justify-center w-full'>
+    <div
+      className={`flex bubble my-2 justify-center w-full ${
+        index === modal && 'modal'
+      }
+      ${index !== modal && modal !== -1 && 'opacity-25'}
+      `}
+    >
       <div className='w-full'>
         <div className='max-w-md w-full'>
           <label>title: </label>
@@ -49,11 +77,8 @@ export const BubbleEdit: FC<{
         </div>
       </div>
       <div className='flex flex-col justify-center'>
-        <button
-          className='btn-alt my-2'
-          onClick={() => setDisabled((prev) => !prev)}
-        >
-          {disabled ? 'Edit' : 'Lock'}
+        <button className='btn-alt my-2' onClick={() => handleEdit()}>
+          {disabled ? 'Edit' : 'Back'}
         </button>
         <button
           className='btn-alt-del my-2'

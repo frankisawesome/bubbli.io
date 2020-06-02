@@ -9,7 +9,7 @@ export const UserDashboard = () => {
 
   if (user) {
     return (
-      <div className='page-card w-5/6 max-w-2xl'>
+      <div className='page-card-no-border md:page-card w-5/6 max-w-2xl'>
         <h1 className='font-semibold text-3xl'>
           Greetings, {user.displayName}
         </h1>

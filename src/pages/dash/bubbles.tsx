@@ -17,6 +17,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [saveMessage, setSaveMessage] = useState<string | null>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modal, setModal] = useState(-1);
 
   useEffect(() => {
     firebase.db
@@ -104,6 +105,8 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
             handleDelete={handleDeleteElement}
             handleChange={handleOnChange}
             handleBlur={handleSave}
+            modal={modal}
+            setModal={setModal}
           />
         ))
       ) : (

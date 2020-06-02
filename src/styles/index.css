@@ -6,6 +6,20 @@
   .normal-max-w {
     width: 1050px;
   }
+
+  .page-card {
+    @apply border-solid border border-gray-700 py-2 px-2 mt-12 flex flex-col items-center mx-2;
+    border-radius: 1rem;
+  }
+
+  .page-card-no-border {
+    @apply py-2 mt-12 flex flex-col items-center mx-2;
+  }
+
+  .px-3-5 {
+    padding-right: 0.875rem;
+    padding-left: 0.875rem;
+  }
 }
 
 body {
@@ -33,10 +47,6 @@ button:focus {
 
 .bubble-hover {
   @apply bg-gray-700 text-white transition duration-300;
-}
-
-.page-card {
-  @apply bubble mt-12 flex flex-col items-center mx-2;
 }
 
 .btn {
@@ -102,4 +112,32 @@ button:focus {
 
 .nav-btn:hover {
   @apply bubble-hover;
+}
+
+.modal {
+  @apply shadow-xl;
+  position: fixed;
+  z-index: 500;
+  background-color: white;
+  width: 70%;
+  border: 1px solid #ccc;
+  padding: 16px;
+  left: 15%;
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+
+.modal-lg {
+  @apply shadow-xl;
+  position: fixed;
+  z-index: 500;
+  background-color: white;
+  width: 500px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  left: calc(50% - 250px);
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
 }
