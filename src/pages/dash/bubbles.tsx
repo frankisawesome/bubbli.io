@@ -112,7 +112,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       ) : (
         <p>Loading portfolio</p>
       )}
-      <button className='btn my-2' onClick={handleAddElement}>
+      <button className='btn-alt-2 my-2' onClick={handleAddElement}>
         Create New Bubble
       </button>
       {saveMessage && <p>{saveMessage}</p>}

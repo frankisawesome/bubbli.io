@@ -38,6 +38,11 @@ export const BubbleEdit: FC<{
   function handleEdit() {
     setDisabled((prev) => !prev);
   }
+
+  function deleteAndReset() {
+    handleDelete(index);
+    setModal(-1);
+  }
   return (
     <div
       className={`flex bubble my-2 justify-center w-full ${
@@ -96,10 +101,7 @@ export const BubbleEdit: FC<{
         <button className='btn-alt my-2' onClick={() => handleEdit()}>
           {disabled ? 'Edit' : 'Back'}
         </button>
-        <button
-          className='btn-alt-del my-2'
-          onClick={() => handleDelete(index)}
-        >
+        <button className='btn-alt-del my-2' onClick={() => deleteAndReset()}>
           Delete
         </button>
       </div>

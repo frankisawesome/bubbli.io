@@ -84,6 +84,14 @@ button:focus {
   border-radius: 1rem;
 }
 
+.btn-alt-2 {
+  @apply bubble bg-gray-600 text-white py-2 px-2;
+}
+
+.btn-alt-2:hover {
+  @apply bg-white text-gray-600 transition duration-300;
+}
+
 .btn-alt-del {
   @apply py-2 px-2 text-red-500;
 }
