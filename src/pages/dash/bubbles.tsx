@@ -96,7 +96,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   }
 
   return (
-    <div className='flex flex-col w-5/6 max-w-xl'>
+    <div className='flex flex-col w-full max-w-xl'>
       {portfolio ? (
         portfolio.bubbles.map((bubble, i) => (
           <BubbleEdit

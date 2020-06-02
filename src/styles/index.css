@@ -20,6 +20,20 @@
     padding-right: 0.875rem;
     padding-left: 0.875rem;
   }
+
+  .modal-lg {
+    @apply shadow-xl;
+    position: fixed;
+    z-index: 500;
+    background-color: white;
+    width: 500px;
+    border: 1px solid #ccc;
+    padding: 16px;
+    left: calc(50% - 250px);
+    top: 30%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+  }
 }
 
 body {
@@ -29,6 +43,10 @@ body {
 
 button:focus {
   outline: 0;
+}
+
+.border-left {
+  border-left: 1px solid;
 }
 
 .bubble {
@@ -119,24 +137,10 @@ button:focus {
   position: fixed;
   z-index: 500;
   background-color: white;
-  width: 70%;
+  width: 90%;
   border: 1px solid #ccc;
   padding: 16px;
-  left: 15%;
-  top: 30%;
-  box-sizing: border-box;
-  transition: all 0.3s ease-out;
-}
-
-.modal-lg {
-  @apply shadow-xl;
-  position: fixed;
-  z-index: 500;
-  background-color: white;
-  width: 500px;
-  border: 1px solid #ccc;
-  padding: 16px;
-  left: calc(50% - 250px);
+  left: 5%;
   top: 30%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;

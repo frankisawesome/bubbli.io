@@ -41,7 +41,7 @@ export const BubbleEdit: FC<{
   return (
     <div
       className={`flex bubble my-2 justify-center w-full ${
-        index === modal && 'modal'
+        index === modal && 'modal sm:modal-lg'
       }
       ${index !== modal && modal !== -1 && 'opacity-25'}
       `}
@@ -51,7 +51,8 @@ export const BubbleEdit: FC<{
           <h1 className='text-2xl'>{bubble.title}</h1>
         </div>
       ) : (
-        <div className='w-full'>
+        <div className='w-full flex flex-col items-center'>
+          <h1 className='text-xl my-2 font-semibold'>Edit Your Bubble</h1>
           <div className='max-w-md w-full'>
             <label>title: </label>
             <input
@@ -87,7 +88,11 @@ export const BubbleEdit: FC<{
         </div>
       )}
 
-      <div className={`${disabled ? 'flex' : 'flex flex-col justify-center'}`}>
+      <div
+        className={`${
+          disabled ? 'flex' : 'flex flex-col justify-center'
+        } border-left px-1`}
+      >
         <button className='btn-alt my-2' onClick={() => handleEdit()}>
           {disabled ? 'Edit' : 'Back'}
         </button>
