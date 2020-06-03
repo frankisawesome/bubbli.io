@@ -168,3 +168,8 @@ button:focus {
   @apply text-gray-700 bg-white border-gray-700 border transition duration-300;
   margin-top: 0;
 }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+}
