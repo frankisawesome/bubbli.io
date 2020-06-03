@@ -4,6 +4,7 @@ import { validator } from './validator';
 import { FirebaseContext } from '../../firebase/Firebase';
 import { Link, Redirect } from 'react-router-dom';
 import { UserContext } from '../../hooks/useAuth';
+import { ErrorMessage } from '../../components/errorMessage';
 
 type formType = 'login' | 'register';
 
@@ -35,6 +36,8 @@ export const LoginRegisterForm: FC<any> = (props) => {
     } catch (e) {
       if (e.message === 'Request failed with status code 409') {
         setSubmissionError('User already exists!');
+      } else {
+        setSubmissionError(e.message);
       }
     }
   }
@@ -93,7 +96,13 @@ export const LoginRegisterForm: FC<any> = (props) => {
           {errorMap && errorMap.password && (
             <p className='font-bold'>{errorMap.password}</p>
           )}
-          {submissionError && <p className='font-bold'>{submissionError}</p>}
+          {submissionError && (
+            <ErrorMessage
+              errorTitle={`${form} failed!`}
+              errorMessage={submissionError}
+              closeCallback={() => setSubmissionError(null)}
+            />
+          )}
 
           <div className='flex flex-col space-y-2'>
             <button

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import bioImg from '../images/bio.png';
+import { Link } from 'react-router-dom';
 
 export const Home: FC = () => {
   return (
@@ -8,6 +9,9 @@ export const Home: FC = () => {
       <h1 className='text-center font-semibold text-4xl my-4'>
         your personal online <span className='text-gray-600'>bio</span>
       </h1>
+      <Link to='/login' className='big-btn my-4'>
+        Get Started
+      </Link>
       <div>
         <img src={bioImg} className='max-h-half bubble mt-4' />
       </div>

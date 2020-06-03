@@ -10,6 +10,7 @@ import { Bio } from './pages/bio/bio';
 import { Forgot } from './pages/forgot';
 import { Settings } from './pages/dash/settings';
 import { About } from './pages/about';
+import { Footer } from './pages/footer';
 
 export const App: FC = () => {
   const firebase: Firebase = useContext(FirebaseContext);
@@ -33,6 +34,7 @@ export const App: FC = () => {
               render={(props) => <Bio {...props} toggleNav={setShowNav} />}
             />
           </Switch>
+          <Footer />
         </div>
       </Router>
     </UserContext.Provider>

@@ -16,7 +16,6 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   const firebase = useContext(FirebaseContext);
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [saveMessage, setSaveMessage] = useState<string | null>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [modal, setModal] = useState(-1);
 
   //fetch portfolio for user on mount
@@ -89,16 +88,13 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
 
   function handleSave() {
     if (portfolio) {
-      setIsSubmitting(true);
       firebase.db
         .collection('portfolios')
         .doc(user.uid)
         .set(portfolio)
-        .then(() => setIsSubmitting(false))
         .then(() => setSaveMessage('Portfolio saved'))
         .catch(() => {
           setSaveMessage('Error saving');
-          setIsSubmitting(false);
         });
       setTimeout(() => setSaveMessage(null), 5000);
     }
