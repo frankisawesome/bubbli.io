@@ -19,6 +19,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [modal, setModal] = useState(-1);
 
+  //fetch portfolio for user on mount
   useEffect(() => {
     firebase.db
       .collection('portfolios')
@@ -31,6 +32,14 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       });
   }, []);
 
+  //saves when bubbles.length change so delete ops are synced
+  useEffect(() => {
+    if (portfolio) {
+      handleSave();
+    }
+  }, [portfolio?.bubbles.length]);
+
+  //should do nothing when the portfolio is still loading
   function handleAddElement() {
     setPortfolio((prev) => {
       if (prev) {

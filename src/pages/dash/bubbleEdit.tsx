@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Bubble } from './bubbles';
-import { BubbleView } from '../bio/bubbleView';
 
 export const BubbleEdit: FC<{
   bubble: Bubble;
