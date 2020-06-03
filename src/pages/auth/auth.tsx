@@ -43,7 +43,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
   }
   if (!user) {
     return (
-      <div className='block mt-12 w-3/4 lg:w-1/2'>
+      <form className='block mt-12 w-3/4 lg:w-1/2' onSubmit={handleSubmit}>
         <div className='flex flex-col items-center space-y-4 bubble'>
           <h2 className='text-3xl font-semibold'>
             {form === 'login' ? 'login' : 'create account'}
@@ -106,6 +106,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
 
           <div className='flex flex-col space-y-2'>
             <button
+              type='submit'
               onMouseDown={handleSubmit}
               disabled={isSubmitting}
               className={isSubmitting ? 'btn btn-submitting' : 'btn'}
@@ -129,7 +130,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
             </Link>
           </div>
         </div>
-      </div>
+      </form>
     );
   } else {
     return <Redirect to='/admin' />;

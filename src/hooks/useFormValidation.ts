@@ -50,7 +50,7 @@ export const useFormValidation = (
     setErrorMap(errors);
   }
 
-  function handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     const errors = validator(values);
     setErrorMap(errors);
