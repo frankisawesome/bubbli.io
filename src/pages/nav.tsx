@@ -10,20 +10,20 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
   return (
     <nav className={`${show ? 'nav' : 'hidden'} w-full lg:normal-max-w`}>
       <Link to='/' className='nav-btn'>
-        Home
+        home
       </Link>
-      <Link to='/' className='nav-btn'>
-        bubbli.io
+      <Link to='/about' className='nav-btn'>
+        {location.pathname === '/' ? 'about' : 'bubbli.io'}
       </Link>
       {user ? (
         <>
           {location.pathname === '/admin' ? (
             <Link className='nav-btn' to='/settings'>
-              Settings
+              settings
             </Link>
           ) : (
             <Link className='nav-btn' to='/admin'>
-              Admin
+              admin
             </Link>
           )}
           <button className='nav-btn' onClick={() => firebase.logout()}>

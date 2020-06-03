@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useState, useEffect } from 'react';
 import { useAuth, UserContext } from './hooks/useAuth';
 import { Nav } from './pages/nav';
 import { LoginRegisterForm } from './pages/auth/auth';
@@ -9,11 +9,13 @@ import { UserDashboard } from './pages/dash/dash';
 import { Bio } from './pages/bio/bio';
 import { Forgot } from './pages/forgot';
 import { Settings } from './pages/dash/settings';
+import { About } from './pages/about';
 
 export const App: FC = () => {
   const firebase: Firebase = useContext(FirebaseContext);
   const user: firebase.User | null = useAuth(firebase);
   const [showNav, setShowNav] = useState(true);
+
   return (
     <UserContext.Provider value={user}>
       <Router>
@@ -25,6 +27,7 @@ export const App: FC = () => {
             <Route path='/admin' component={UserDashboard} />
             <Route path='/forgot' component={Forgot} />
             <Route path='/settings' component={Settings} />
+            <Route path='/about' component={About} />
             <Route
               path='/:name'
               render={(props) => <Bio {...props} toggleNav={setShowNav} />}

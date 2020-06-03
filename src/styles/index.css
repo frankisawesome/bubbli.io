@@ -7,6 +7,10 @@
     width: 1050px;
   }
 
+  .max-h-half {
+    max-height: 50vh;
+  }
+
   .page-card {
     @apply border-solid border border-gray-700 py-2 px-2 mt-12 flex flex-col items-center mx-2;
     border-radius: 1rem;
