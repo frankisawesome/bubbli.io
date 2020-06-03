@@ -35,6 +35,10 @@ export const BubbleEdit: FC<{
   }, [disabled]);
 
   function handleEdit() {
+    if (!disabled && bubble.title === '' && bubble.url === '') {
+      setDisabled(false);
+      deleteAndReset();
+    }
     setDisabled((prev) => !prev);
   }
 
