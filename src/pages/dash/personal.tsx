@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface PersonalDetail {
   photoUrl?: string;
@@ -9,10 +10,13 @@ interface PersonalDetail {
 export const Personal = (props: PersonalDetail) => {
   return (
     <div className='flex'>
-      <div className='w-24 h-24 rounded-full bg-gray-600 mt-6'></div>
-      <div className='flex flex-col justify-center ml-4'>
+      <div className='w-24 h-24 rounded-full bg-gray-600 mt-6 mx-6'></div>
+      <div className='flex flex-col justify-center mx-6'>
         <h1 className='font-semibold text-xl'>Hello, {props.name}</h1>
-        <h2>{props.email}</h2>
+        <a href='https://bubbli.io/frank'>bubbli.io/{props.name}</a>
+        <Link className='text-gray-700' to='/settings'>
+          {props.photoUrl ? 'change avatar' : 'set avatar'}
+        </Link>
       </div>
     </div>
   );
