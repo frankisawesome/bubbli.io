@@ -50,9 +50,9 @@ export const Bio: FC<
         )}
       </div>
       <div>
-        <h1 className='rounded-full border border-gray-600 px-3-5 py-1 text-3xl text-white bg-gray-600 hover:bg-white hover:text-gray-600 transition duration-300 mb-6'>
+        {/*<h1 className='rounded-full border border-gray-600 px-3-5 py-1 text-3xl text-white bg-gray-600 hover:bg-white hover:text-gray-600 transition duration-300 mb-6'>
           <a href='/'>b.</a>
-        </h1>
+        </h1> */}
       </div>
     </div>
   );
