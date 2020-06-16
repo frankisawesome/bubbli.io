@@ -15,7 +15,6 @@ export const UserDashboard = () => {
           name={user.displayName as string}
           email={user.email as string}
         />
-        <p className='my-4 text-xl'>Manage your bubbles</p>
         <Bubbles user={user} />
       </div>
     );

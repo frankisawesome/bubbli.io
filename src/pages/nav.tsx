@@ -10,7 +10,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
   return (
     <nav className={`${show ? 'nav' : 'hidden'}`}>
       <div className='flex items-center w-full lg:normal-max-w space-x-10 justify-between'>
-        <div className='box'>
+        <div className='hidden lg:box'>
           <Link to='/' className='nav-btn'>
             home
           </Link>
@@ -18,13 +18,17 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
             about
           </Link>
         </div>
-        <div className='box'>
-          <span className='rounded-full border px-3 py-1 text-gray-600 bg-white text-xl'>
+        <div className='lg:box flex items-center space-x-4'>
+          <span className='rounded-full border px-4 py-2 text-gray-600 bg-white text-xl'>
             <a href='/'>b.</a>
           </span>
+          <p className='hidden lg:block text-white text-xl font-semibold'>
+            {location.pathname === '/admin' && 'Manage Bubbles'}
+            {location.pathname === '/settings' && 'Change Settings'}
+          </p>
         </div>
         {user ? (
-          <div className='box'>
+          <div className='hidden lg:box'>
             {location.pathname === '/admin' ? (
               <Link className='nav-btn' to='/settings'>
                 settings
@@ -39,12 +43,23 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
             </button>
           </div>
         ) : (
-          <div className='box'>
+          <div className='hidden lg:box'>
             <Link className='nav-btn' to='/login'>
               log in
             </Link>
           </div>
         )}
+        <p className='text-white text-xl font-semibold lg:hidden'>
+          {location.pathname === '/admin' && 'Manage Bubbles'}
+          {location.pathname === '/settings' && 'Change Settings'}
+        </p>
+        <div className='pr-8 lg:hidden'>
+          <div className='hamburger'>
+            <div className='line'></div>
+            <div className='line'></div>
+            <div className='line'></div>
+          </div>
+        </div>
       </div>
     </nav>
   );

@@ -38,6 +38,20 @@
     box-sizing: border-box;
     transition: all 0.3s ease-out;
   }
+
+  .box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .box:first-child > span {
+    margin-right: auto;
+  }
+
+  .box:last-child > span {
+    margin-left: auto;
+  }
 }
 
 body {
@@ -136,20 +150,6 @@ button:focus {
   @apply bg-gray-600 h-16 w-full flex justify-center;
 }
 
-.box {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.box:first-child > span {
-  margin-right: auto;
-}
-
-.box:last-child > span {
-  margin-left: auto;
-}
-
 .nav-btn {
   @apply m-2 text-white text-xl p-2;
 }
@@ -186,4 +186,16 @@ button:focus {
 .footer {
   position: absolute;
   bottom: 0;
+}
+
+.line {
+  width: 30px;
+  height: 3px;
+  margin: 5px;
+  @apply bg-gray-600;
+}
+
+.hamburger {
+  cursor: pointer;
+  @apply rounded-full bg-white py-2 px-1;
 }
