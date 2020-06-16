@@ -17,7 +17,9 @@ export const validator = (fields: NameToStringMap): NameToStringMap | null => {
 
   if (fields.name.length > 20) {
     errors.name = 'Nick name must be under 20 characters';
-  } else if (fields.name === ('about' || 'admin' || 'settings' || 'login')) {
+  } else if (
+    fields.name === ('about' || 'admin' || 'settings' || 'login' || '')
+  ) {
     errors.name = 'Forbidden user name';
   }
 

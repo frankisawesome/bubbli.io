@@ -7,7 +7,6 @@ export const Footer = () => {
       <span className='rounded-full border border-gray-600 px-3 py-1 text-white bg-gray-600 text-xl mx-4'>
         <a href='/'>b.</a>
       </span>
-      <h1>2020</h1>
     </div>
   );
 };
