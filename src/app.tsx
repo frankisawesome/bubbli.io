@@ -11,6 +11,7 @@ import { Forgot } from './pages/forgot';
 import { Settings } from './pages/dash/settings';
 import { About } from './pages/about';
 import { Footer } from './pages/footer';
+import { Menu } from './pages/menu';
 
 export const App: FC = () => {
   const firebase: Firebase = useContext(FirebaseContext);
@@ -29,6 +30,10 @@ export const App: FC = () => {
             <Route path='/forgot' component={Forgot} />
             <Route path='/settings' component={Settings} />
             <Route path='/about' component={About} />
+            <Route
+              path='/menu'
+              render={(props) => <Menu {...props} toggleNav={setShowNav} />}
+            />
             <Route
               path='/:name'
               render={(props) => <Bio {...props} toggleNav={setShowNav} />}

@@ -54,11 +54,13 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
           {location.pathname === '/settings' && 'Change Settings'}
         </p>
         <div className='pr-8 lg:hidden'>
-          <div className='hamburger'>
-            <div className='line'></div>
-            <div className='line'></div>
-            <div className='line'></div>
-          </div>
+          <Link to='/menu'>
+            <div className='hamburger'>
+              <div className='line'></div>
+              <div className='line'></div>
+              <div className='line'></div>
+            </div>
+          </Link>
         </div>
       </div>
     </nav>
