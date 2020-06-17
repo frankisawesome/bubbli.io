@@ -46,67 +46,69 @@ export const BubbleEdit: FC<{
     handleDelete(index);
     setModal(-1);
   }
+
+  const titleInput = (
+    <div className='max-w-md w-full'>
+      <label>title: </label>
+      <input
+        disabled={disabled}
+        className={`my-2 ${disabled ? 'form-input-disabled' : 'form-input'}`}
+        value={bubble.title}
+        onChange={(e) =>
+          handleChange(index, { url: bubble.url, title: e.target.value })
+        }
+        onBlur={handleBlur}
+      ></input>
+    </div>
+  );
+
+  const linkInput = (
+    <div className='max-w-md w-full'>
+      <label>link: </label>
+      <input
+        disabled={disabled}
+        className={`my-2 ${disabled ? ' form-input-disabled' : 'form-input'}`}
+        value={bubble.url}
+        onChange={(e) =>
+          handleChange(index, {
+            url: e.target.value,
+            title: bubble.title,
+          })
+        }
+        onBlur={handleBlur}
+      ></input>
+    </div>
+  );
   return (
     <div
-      className={`flex bubble my-2 justify-center w-full ${
+      className={`flex flex-col bubble my-2 justify-center w-full ${
         index === modal && 'modal sm:modal-lg'
       }
       ${index !== modal && modal !== -1 && 'opacity-25'}
       `}
     >
-      {disabled ? (
-        <div className='w-full flex justify-center items-center'>
-          <h1 className='text-2xl'>{bubble.title}</h1>
-        </div>
-      ) : (
-        <div className='w-full flex flex-col items-center'>
-          <h1 className='text-xl my-2 font-semibold'>Edit Your Bubble</h1>
-          <div className='max-w-md w-full'>
-            <label>title: </label>
-            <input
-              disabled={disabled}
-              className={`my-2 ${
-                disabled ? 'form-input-disabled' : 'form-input'
-              }`}
-              value={bubble.title}
-              onChange={(e) =>
-                handleChange(index, { url: bubble.url, title: e.target.value })
-              }
-              onBlur={handleBlur}
-            ></input>
-          </div>
-
-          <div className='max-w-md w-full'>
-            <label>link: </label>
-            <input
-              disabled={disabled}
-              className={`my-2 ${
-                disabled ? ' form-input-disabled' : 'form-input'
-              }`}
-              value={bubble.url}
-              onChange={(e) =>
-                handleChange(index, {
-                  url: e.target.value,
-                  title: bubble.title,
-                })
-              }
-              onBlur={handleBlur}
-            ></input>
-          </div>
-        </div>
-      )}
-
-      <div
-        className={`${
-          disabled ? 'flex' : 'flex flex-col justify-center'
-        } border-left px-1`}
-      >
-        <button className='btn-alt my-2' onClick={() => handleEdit()}>
-          {disabled ? 'Edit' : 'Back'}
-        </button>
-        <button className='btn-alt-del my-2' onClick={() => deleteAndReset()}>
+      <div className='flex justify-between'>
+        <button className='btn-alt-del' onClick={() => deleteAndReset()}>
           Delete
         </button>
+        {disabled ? (
+          <h1 className='text-xl'>{bubble.title}</h1>
+        ) : (
+          <h1 className='text-xl font-semibold'>Edit</h1>
+        )}
+        <button className='btn-alt' onClick={() => handleEdit()}>
+          {disabled ? 'Edit' : 'Done'}
+        </button>
+      </div>
+      <div className='w-full flex flex-col items-center'>
+        {disabled ? (
+          <p className='text-sm text-gray-600'>{bubble.url}</p>
+        ) : (
+          <>
+            {titleInput}
+            {linkInput}
+          </>
+        )}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export const Menu = (props: any) => {
         <button onClick={goBack} className='close'></button>
       </div>
       <div className='flex flex-col items-center space-y-10 pt-10'>
-        <Link className='menu-btn' to='/home'>
+        <Link className='menu-btn' to='/'>
           home
         </Link>
         <Link className='menu-btn' to='/about'>

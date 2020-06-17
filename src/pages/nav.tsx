@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { Link, RouteComponentProps, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FirebaseContext } from '../firebase/Firebase';
 import { UserContext } from '../hooks/useAuth';
 
@@ -52,6 +52,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
         <p className='text-white text-xl font-semibold lg:hidden'>
           {location.pathname === '/admin' && 'Manage Bubbles'}
           {location.pathname === '/settings' && 'Change Settings'}
+          {location.pathname === '/' && 'bubbli.io'}
         </p>
         <div className='pr-8 lg:hidden'>
           <Link to='/menu'>
