@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect } from 'react';
-import { Bubble } from './bubbles';
+import React, { FC, useState, useEffect } from "react";
+import { Bubble } from "./bubbles";
 
 export const BubbleEdit: FC<{
   bubble: Bubble;
@@ -19,12 +19,22 @@ export const BubbleEdit: FC<{
   modal,
 }) => {
   const [disabled, setDisabled] = useState<boolean>(true);
+  const [type, setType] = useState(bubble.type);
 
   useEffect(() => {
     if (!bubble.title && !bubble.url) {
       setDisabled(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (bubble.type !== type) {
+      const newEl = bubble;
+      newEl.type = type;
+      handleChange(index, newEl);
+      handleBlur();
+    }
+  }, [type]);
 
   useEffect(() => {
     if (!disabled) {
@@ -35,7 +45,7 @@ export const BubbleEdit: FC<{
   }, [disabled]);
 
   function handleEdit() {
-    if (!disabled && bubble.title === '' && bubble.url === '') {
+    if (!disabled && bubble.title === "" && bubble.url === "") {
       setDisabled(false);
       deleteAndReset();
     }
@@ -48,14 +58,18 @@ export const BubbleEdit: FC<{
   }
 
   const titleInput = (
-    <div className='max-w-md w-full'>
+    <div className="max-w-md w-full">
       <label>title: </label>
       <input
         disabled={disabled}
-        className={`my-2 ${disabled ? 'form-input-disabled' : 'form-input'}`}
+        className={`my-2 ${disabled ? "form-input-disabled" : "form-input"}`}
         value={bubble.title}
         onChange={(e) =>
-          handleChange(index, { url: bubble.url, title: e.target.value })
+          handleChange(index, {
+            url: bubble.url,
+            title: e.target.value,
+            type: type,
+          })
         }
         onBlur={handleBlur}
       ></input>
@@ -63,16 +77,17 @@ export const BubbleEdit: FC<{
   );
 
   const linkInput = (
-    <div className='max-w-md w-full'>
+    <div className="max-w-md w-full">
       <label>link: </label>
       <input
         disabled={disabled}
-        className={`my-2 ${disabled ? ' form-input-disabled' : 'form-input'}`}
+        className={`my-2 ${disabled ? " form-input-disabled" : "form-input"}`}
         value={bubble.url}
         onChange={(e) =>
           handleChange(index, {
             url: e.target.value,
             title: bubble.title,
+            type: type,
           })
         }
         onBlur={handleBlur}
@@ -81,34 +96,71 @@ export const BubbleEdit: FC<{
   );
   return (
     <div
-      className={`flex flex-col bubble my-2 justify-center w-full ${
-        index === modal && 'modal sm:modal-lg'
+      className={`flex flex-col bubble my-2 justify-center items-center ${
+        index === modal && "modal sm:modal-lg"
       }
-      ${index !== modal && modal !== -1 && 'opacity-25'}
+      ${index !== modal && modal !== -1 && "opacity-25"}
       `}
     >
-      <div className='flex justify-between'>
-        <button className='btn-alt-del' onClick={() => deleteAndReset()}>
-          Delete
-        </button>
+      {/* top level buttons and title */}
+      <div className="flex w-full">
+        <div className="box justify-start">
+          <button className="btn-alt-del" onClick={() => deleteAndReset()}>
+            delete
+          </button>
+        </div>
+
         {disabled ? (
-          <h1 className='text-xl'>{bubble.title}</h1>
+          <h1 className="text-xl box justify-center">{bubble.title}</h1>
         ) : (
-          <h1 className='text-xl font-semibold'>Edit</h1>
+          <h1 className="text-xl font-semibold box justify-center">Edit</h1>
         )}
-        <button className='btn-alt' onClick={() => handleEdit()}>
-          {disabled ? 'Edit' : 'Done'}
-        </button>
+        <div className="box justify-end">
+          <button className="btn-alt" onClick={() => handleEdit()}>
+            {disabled ? "edit" : "done"}
+          </button>
+        </div>
       </div>
-      <div className='w-full flex flex-col items-center'>
+      {/* second level display url or inputs */}
+      <div className="w-full flex flex-col items-center justify-center">
         {disabled ? (
-          <p className='text-sm text-gray-600'>{bubble.url}</p>
+          <p className="text-sm text-gray-600">{bubble.url}</p>
         ) : (
           <>
             {titleInput}
             {linkInput}
           </>
         )}
+      </div>
+      {/* third level bubble types*/}
+      <div className="flex space-x-2 text-gray-600">
+        <div className="box justify-start">
+          <button
+            className={`${type == "photo" && "font-bold"}`}
+            onClick={() => setType("photo")}
+            disabled={disabled}
+          >
+            Photo
+          </button>
+        </div>
+        <div className="box justify-center">
+          <button
+            className={`${type == "link" && "font-bold"}`}
+            onClick={() => setType("link")}
+            disabled={disabled}
+          >
+            Link
+          </button>
+        </div>
+        <div className="box justify-end">
+          <button
+            className={`${type == "paragraph" && "font-bold"}`}
+            onClick={() => setType("paragraph")}
+            disabled={disabled}
+          >
+            Paragragh
+          </button>
+        </div>
       </div>
     </div>
   );

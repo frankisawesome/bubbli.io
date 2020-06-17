@@ -1,7 +1,7 @@
-import React, { FC, useState, useContext, useEffect } from 'react';
-import Firebase from 'firebase';
-import { FirebaseContext } from '../../firebase/Firebase';
-import { BubbleEdit } from './bubbleEdit';
+import React, { FC, useState, useContext, useEffect } from "react";
+import Firebase from "firebase";
+import { FirebaseContext } from "../../firebase/Firebase";
+import { BubbleEdit } from "./bubbleEdit";
 export interface Portfolio {
   name: string;
   bubbles: Bubble[];
@@ -10,6 +10,7 @@ export interface Portfolio {
 export interface Bubble {
   title: string;
   url: string;
+  type: "photo" | "paragraph" | "link";
 }
 
 export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
@@ -21,7 +22,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   //fetch portfolio for user on mount
   useEffect(() => {
     firebase.db
-      .collection('portfolios')
+      .collection("portfolios")
       .doc(user.uid)
       .onSnapshot((snapshot) => {
         const data = snapshot.data() as Portfolio;
@@ -44,8 +45,9 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       if (prev) {
         const bubbles = prev.bubbles;
         bubbles.push({
-          title: '',
-          url: '',
+          title: "",
+          url: "",
+          type: "link",
         });
         return {
           name: prev.name,
@@ -89,19 +91,19 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   function handleSave() {
     if (portfolio) {
       firebase.db
-        .collection('portfolios')
+        .collection("portfolios")
         .doc(user.uid)
         .set(portfolio)
-        .then(() => setSaveMessage('Portfolio saved'))
+        .then(() => setSaveMessage("Portfolio saved"))
         .catch(() => {
-          setSaveMessage('Error saving');
+          setSaveMessage("Error saving");
         });
       setTimeout(() => setSaveMessage(null), 5000);
     }
   }
 
   return (
-    <div className='flex flex-col w-full max-w-xl'>
+    <div className="flex flex-col w-full max-w-xl">
       {portfolio ? (
         portfolio.bubbles.map((bubble, i) => (
           <BubbleEdit
@@ -117,7 +119,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       ) : (
         <p>Loading portfolio</p>
       )}
-      <button className='btn-alt-2 my-2' onClick={handleAddElement}>
+      <button className="btn-alt-2 my-2" onClick={handleAddElement}>
         Create New Bubble
       </button>
       {saveMessage && <p>{saveMessage}</p>}
