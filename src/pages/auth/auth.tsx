@@ -58,7 +58,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
                 className={
                   errorMap && errorMap.name ? 'form-input-error' : 'form-input'
                 }
-                placeholder='Your name'
+                placeholder='bio name unique to you'
                 value={values.name}
               ></input>
               {errorMap && errorMap.name && (
@@ -72,7 +72,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
             onBlur={handleBlur}
             name='email'
             type='email'
-            placeholder='Your email'
+            placeholder='your email'
             className={
               errorMap && errorMap.email ? 'form-input-error' : 'form-input'
             }
@@ -87,7 +87,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
             onBlur={handleBlur}
             name='password'
             type='password'
-            placeholder='Choose password'
+            placeholder='your password'
             className={
               errorMap && errorMap.password ? 'form-input-error' : 'form-input'
             }
