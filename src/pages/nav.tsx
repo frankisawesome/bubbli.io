@@ -10,7 +10,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
   return (
     <nav className={`${show ? 'nav' : 'hidden'}`}>
       <div className='flex items-center w-full lg:normal-max-w space-x-10 justify-between'>
-        <div className='hidden lg:box'>
+        <div className='hidden lg:box justify-center'>
           <Link to='/' className='nav-btn'>
             home
           </Link>
@@ -18,7 +18,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
             about
           </Link>
         </div>
-        <div className='lg:box flex items-center space-x-4'>
+        <div className='lg:box justify-center flex items-center space-x-4'>
           <span className='rounded-full border px-4 py-2 text-gray-600 bg-white text-xl'>
             <a href='/'>b.</a>
           </span>
@@ -28,7 +28,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
           </p>
         </div>
         {user ? (
-          <div className='hidden lg:box'>
+          <div className='hidden lg:box justify-center'>
             {location.pathname === '/admin' ? (
               <Link className='nav-btn' to='/settings'>
                 settings
@@ -43,7 +43,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
             </button>
           </div>
         ) : (
-          <div className='hidden lg:box'>
+          <div className='hidden lg:box justify-center'>
             <Link className='nav-btn' to='/login'>
               log in
             </Link>
