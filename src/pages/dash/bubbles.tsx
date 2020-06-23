@@ -2,6 +2,7 @@ import React, { FC, useState, useContext, useEffect } from 'react';
 import Firebase from 'firebase';
 import { FirebaseContext } from '../../firebase/Firebase';
 import { BubbleEdit } from './bubbleEdit';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 export interface Portfolio {
   name: string;
   bubbles: Bubble[];
@@ -38,7 +39,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
     if (portfolio) {
       handleSave();
     }
-  }, [portfolio?.bubbles.length]);
+  }, [portfolio?.bubbles]);
 
   //should do nothing when the portfolio is still loading
   function handleAddElement() {
@@ -110,10 +111,14 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
     }
   }
 
-  return (
-    <div className='flex flex-col w-full max-w-xl'>
-      {portfolio ? (
-        portfolio.bubbles.map((bubble, i) => (
+  const BubbleList = portfolio?.bubbles.map((bubble, i) => (
+    <Draggable draggableId={`${i}`} index={i}>
+      {(provided) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
           <BubbleEdit
             bubble={bubble}
             index={i}
@@ -123,7 +128,61 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
             modal={modal}
             setModal={setModal}
           />
-        ))
+        </div>
+      )}
+    </Draggable>
+  ));
+
+  const reorder = (list: Bubble[], startIndex: number, endIndex: number) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  function onDragEnd(result: any) {
+    if (!result.destination) {
+      return;
+    }
+
+    if (result.destination.index === result.source.index) {
+      return;
+    }
+
+    if (portfolio) {
+      const bubbles: Bubble[] = reorder(
+        portfolio.bubbles,
+        result.source.index,
+        result.destination.index
+      );
+
+      setPortfolio((prev: Portfolio | null) => {
+        if (prev) {
+          return {
+            name: prev?.name,
+            bubbles: bubbles,
+          };
+        } else {
+          return null;
+        }
+      });
+    }
+  }
+
+  return (
+    <div className='flex flex-col w-full max-w-xl'>
+      {portfolio ? (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId='list'>
+            {(provided) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {BubbleList}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       ) : (
         <p>Loading portfolio</p>
       )}
