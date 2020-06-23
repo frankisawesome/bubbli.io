@@ -113,7 +113,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
 
   const BubbleList = portfolio?.bubbles.map((bubble, i) => (
     <Draggable draggableId={`${i}`} index={i}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -127,6 +127,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
             handleBlur={handleSave}
             modal={modal}
             setModal={setModal}
+            isDragging={snapshot.isDragging}
           />
         </div>
       )}

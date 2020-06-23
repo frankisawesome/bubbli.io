@@ -9,6 +9,7 @@ export const BubbleEdit: FC<{
   handleBlur: () => void;
   setModal: (i: number) => void;
   modal: number;
+  isDragging: boolean;
 }> = ({
   bubble,
   index,
@@ -17,6 +18,7 @@ export const BubbleEdit: FC<{
   handleBlur,
   setModal,
   modal,
+  isDragging,
 }) => {
   const [disabled, setDisabled] = useState<boolean>(true);
   const [type, setType] = useState(bubble.type);
@@ -128,6 +130,7 @@ export const BubbleEdit: FC<{
         index === modal && 'modal sm:modal-lg'
       }
       ${index !== modal && modal !== -1 && 'opacity-25'}
+      ${isDragging && 'bg-gray-200'}
       `}
     >
       {/* top level buttons and title */}
