@@ -17,7 +17,7 @@
   }
 
   .page-card-no-border {
-    @apply py-2 mt-12 flex flex-col items-center mx-2;
+    @apply py-2 flex flex-col items-center mx-2;
   }
 
   .px-3-5 {
@@ -180,11 +180,6 @@ button:focus {
 .big-btn:hover {
   @apply text-gray-700 bg-white border-gray-700 border transition duration-300;
   margin-top: 0;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
 }
 
 .line {

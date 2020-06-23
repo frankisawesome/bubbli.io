@@ -21,24 +21,26 @@ export const App: FC = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-        <div className='flex justify-start flex-col items-center min-h-screen max-w-full'>
-          <Nav show={showNav}></Nav>
-          <Switch>
-            <Route exact path='/' component={() => <Home />} />
-            <Route path='/login' component={LoginRegisterForm} />
-            <Route path='/admin' component={UserDashboard} />
-            <Route path='/forgot' component={Forgot} />
-            <Route path='/settings' component={Settings} />
-            <Route path='/about' component={About} />
-            <Route
-              path='/menu'
-              render={(props) => <Menu {...props} toggleNav={setShowNav} />}
-            />
-            <Route
-              path='/:name'
-              render={(props) => <Bio {...props} toggleNav={setShowNav} />}
-            />
-          </Switch>
+        <div className='flex justify-between flex-col items-center min-h-screen max-w-full'>
+          <div className='flex flex-col justify-start items-center w-full'>
+            <Nav show={showNav}></Nav>
+            <Switch>
+              <Route exact path='/' component={() => <Home />} />
+              <Route path='/login' component={LoginRegisterForm} />
+              <Route path='/admin' component={UserDashboard} />
+              <Route path='/forgot' component={Forgot} />
+              <Route path='/settings' component={Settings} />
+              <Route path='/about' component={About} />
+              <Route
+                path='/menu'
+                render={(props) => <Menu {...props} toggleNav={setShowNav} />}
+              />
+              <Route
+                path='/:name'
+                render={(props) => <Bio {...props} toggleNav={setShowNav} />}
+              />
+            </Switch>
+          </div>
           <Footer />
         </div>
       </Router>

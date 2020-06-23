@@ -35,7 +35,7 @@ export const Bio: FC<
     return () => props.toggleNav(true);
   }, []);
   return (
-    <div className='flex flex-col h-screen justify-between w-full items-center'>
+    <div className='flex flex-col justify-between w-full items-center'>
       <div className='w-full items-center flex flex-col'>
         <div className='w-24 h-24 rounded-full bg-gray-600 mt-6'></div>
         <h1 className='text-2xl my-4'>@{name}</h1>
