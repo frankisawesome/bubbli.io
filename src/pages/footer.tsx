@@ -6,8 +6,8 @@ export const Footer = () => {
   return (
     <div
       className={`${
-        inMenu ? 'text-white' : 'text-gray-600'
-      } flex justify-center footer items-center pb-4 pr-6`}
+        inMenu ? 'text-white fixed bottom-0' : 'text-gray-600 footer'
+      } flex justify-center items-center pb-4 pr-6`}
     >
       <h1>bubbli.io</h1>
       <span
