@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FirebaseContext } from '../firebase/Firebase';
 import { UserContext } from '../hooks/useAuth';
 
@@ -7,6 +7,12 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
   const firebase = useContext(FirebaseContext);
   const user = useContext(UserContext);
   const location = useLocation();
+  const history = useHistory();
+
+  const handleLogout = () => {
+    firebase.logout();
+    history.push('/');
+  };
   return (
     <nav className={`${show ? 'nav' : 'hidden'}`}>
       <div className='flex items-center w-full lg:normal-max-w space-x-10 justify-between'>
@@ -38,7 +44,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
                 admin
               </Link>
             )}
-            <button className='nav-btn' onClick={() => firebase.logout()}>
+            <button className='nav-btn' onClick={handleLogout}>
               log out
             </button>
           </div>
@@ -53,6 +59,8 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
           {location.pathname === '/admin' && 'Manage Bubbles'}
           {location.pathname === '/settings' && 'Change Settings'}
           {location.pathname === '/' && 'bubbli.io'}
+          {location.pathname === '/login' && 'Log In & Register'}
+          {location.pathname === '/about' && 'About'}
         </p>
         <div className='pr-8 lg:hidden'>
           <Link to='/menu'>

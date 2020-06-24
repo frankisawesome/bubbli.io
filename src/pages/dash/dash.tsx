@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 import Firebase from 'firebase';
 import { UserContext } from '../../hooks/useAuth';
 import { Bubbles } from './bubbles';
@@ -8,18 +8,24 @@ import { Personal } from './personal';
 export const UserDashboard = () => {
   const user: Firebase.User | null = useContext(UserContext);
   //no idea why user.displayName is null righ after registration
-  const [useless, setUseless] = useState(false);
+  const [hasName, setHasName] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (user?.displayName) {
-      setUseless(true);
-    } else
+      setHasName(true);
+    } else {
       setTimeout(() => {
-        setUseless(true);
+        if (user) {
+          setHasName(true);
+        } else {
+          history.push('/login');
+        }
       }, 1000);
-  });
+    }
+  }, [user]);
 
-  if (user && useless) {
+  if (user && hasName) {
     return (
       <div className='page-card-no-border w-5/6 max-w-2xl'>
         <Personal name={user.displayName as string} />
@@ -27,8 +33,16 @@ export const UserDashboard = () => {
       </div>
     );
   } else if (user) {
-    return <div>Loading User Details</div>;
+    return (
+      <div className='text-center py-2 text-gray-600 font-semibold'>
+        loading user data...
+      </div>
+    );
   } else {
-    return <Redirect to='/login' />;
+    return (
+      <div className='text-center py-2 text-gray-600 font-semibold'>
+        loading user data...
+      </div>
+    );
   }
 };

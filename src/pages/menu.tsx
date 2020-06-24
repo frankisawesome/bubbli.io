@@ -8,18 +8,17 @@ export const Menu = (props: any) => {
     props.toggleNav(false);
     return () => props.toggleNav(true);
   }, []);
-  const goBack = useHistory().goBack;
   const user = useContext(UserContext);
   const firebase = useContext(FirebaseContext);
   const history = useHistory();
   const handleLogout = () => {
     firebase.logout();
-    history.goBack();
+    history.push('/');
   };
   return (
     <div className='h-screen w-screen bg-gray-600'>
       <div className='flex justify-end'>
-        <button onClick={goBack} className='close'></button>
+        <button onClick={() => history.goBack()} className='close'></button>
       </div>
       <div className='flex flex-col items-center space-y-10 pt-10'>
         <Link className='menu-btn' to='/'>

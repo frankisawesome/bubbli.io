@@ -5,7 +5,9 @@ export const BubbleEdit: FC<{
   bubble: Bubble;
   index: number;
   handleDelete: (i: number) => void;
+  //this changes one particular bubble in the portfolio (normally this current one)
   handleChange: (i: number, newEl: Bubble) => void;
+  //this actually syncs the entire portfolio
   handleBlur: () => void;
   setModal: (i: number) => void;
   modal: number;
@@ -21,23 +23,15 @@ export const BubbleEdit: FC<{
   isDragging,
 }) => {
   const [disabled, setDisabled] = useState<boolean>(true);
-  const [type, setType] = useState(bubble.type);
 
+  //If the bubble is empty, it should automatically be in deit view
   useEffect(() => {
     if (!bubble.title && !bubble.url) {
       setDisabled(false);
     }
   }, []);
 
-  useEffect(() => {
-    if (bubble.type !== type) {
-      const newEl = bubble;
-      newEl.type = type;
-      handleChange(index, newEl);
-      handleBlur();
-    }
-  }, [type]);
-
+  //Sets the modal index so other bubbles know how to behave
   useEffect(() => {
     if (!disabled) {
       setModal(index);
@@ -46,6 +40,7 @@ export const BubbleEdit: FC<{
     }
   }, [disabled]);
 
+  //event on clicking 'edit button'
   function handleEdit() {
     if (!disabled && bubble.title === '' && bubble.url === '') {
       setDisabled(false);
@@ -54,6 +49,7 @@ export const BubbleEdit: FC<{
     setDisabled((prev) => !prev);
   }
 
+  //event that performs delete op
   function deleteAndReset() {
     //only show the confirm message if bubble isn't empty
     if (bubble.title !== '' || bubble.url !== '' || bubble.text !== '') {
@@ -62,10 +58,21 @@ export const BubbleEdit: FC<{
         handleDelete(index);
         setModal(-1);
       }
-    } else {
+    }
+    //when bubble is empty delete op requires no confirmation
+    else {
       handleDelete(index);
       setModal(-1);
     }
+  }
+
+  function changeType(type: 'paragraph' | 'link' | 'photo') {
+    handleChange(index, {
+      url: bubble.url,
+      title: bubble.title,
+      type: type,
+      text: bubble.text,
+    });
   }
 
   const titleInput = (
@@ -79,7 +86,7 @@ export const BubbleEdit: FC<{
           handleChange(index, {
             url: bubble.url,
             title: e.target.value,
-            type: type,
+            type: bubble.type,
             text: bubble.text,
           })
         }
@@ -99,7 +106,7 @@ export const BubbleEdit: FC<{
           handleChange(index, {
             url: e.target.value,
             title: bubble.title,
-            type: type,
+            type: bubble.type,
             text: bubble.text,
           })
         }
@@ -119,7 +126,7 @@ export const BubbleEdit: FC<{
           handleChange(index, {
             url: bubble.url,
             title: bubble.title,
-            type: type,
+            type: bubble.type,
             text: e.target.value,
           })
         }
@@ -172,13 +179,13 @@ export const BubbleEdit: FC<{
       </div>
       {/* third level bubble types*/}
       {disabled ? (
-        <h1 className='font-bold text-gray-600'>{type}</h1>
+        <h1 className='font-bold text-gray-600'>{bubble.type}</h1>
       ) : (
         <div className='flex space-x-2 text-gray-600'>
           <div className='box justify-start'>
             <button
-              className={`${type == 'photo' && 'font-bold'}`}
-              onClick={() => setType('photo')}
+              className={`${bubble.type == 'photo' && 'font-bold'}`}
+              onClick={() => changeType('photo')}
               disabled={disabled}
             >
               Photo
@@ -186,8 +193,8 @@ export const BubbleEdit: FC<{
           </div>
           <div className='box justify-center'>
             <button
-              className={`${type == 'link' && 'font-bold'}`}
-              onClick={() => setType('link')}
+              className={`${bubble.type == 'link' && 'font-bold'}`}
+              onClick={() => changeType('link')}
               disabled={disabled}
             >
               Link
@@ -195,8 +202,8 @@ export const BubbleEdit: FC<{
           </div>
           <div className='box justify-end'>
             <button
-              className={`${type == 'paragraph' && 'font-bold'}`}
-              onClick={() => setType('paragraph')}
+              className={`${bubble.type == 'paragraph' && 'font-bold'}`}
+              onClick={() => changeType('paragraph')}
               disabled={disabled}
             >
               Paragragh

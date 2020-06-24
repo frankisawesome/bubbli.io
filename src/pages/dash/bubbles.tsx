@@ -39,7 +39,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
     if (portfolio) {
       handleSave();
     }
-  }, [portfolio?.bubbles]);
+  }, [portfolio]);
 
   //should do nothing when the portfolio is still loading
   function handleAddElement() {
