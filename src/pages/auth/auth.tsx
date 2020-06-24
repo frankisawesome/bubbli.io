@@ -34,6 +34,7 @@ export const LoginRegisterForm: FC<any> = (props) => {
         ? await firebase.login({ email, password })
         : await firebase.register({ email, name, password });
     } catch (e) {
+      //axios will throw this if there's a duplicate username
       if (e.message === 'Request failed with status code 409') {
         setSubmissionError('User already exists!');
       } else {
@@ -128,6 +129,9 @@ export const LoginRegisterForm: FC<any> = (props) => {
             <Link className='btn-alt text-center' to='/forgot'>
               forgot password?
             </Link>
+            {form === 'register' && isSubmitting && (
+              <h1 className='px-4'>Validating user name, just a moment...</h1>
+            )}
           </div>
         </div>
       </form>

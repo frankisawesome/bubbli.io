@@ -62,6 +62,9 @@ export const BubbleEdit: FC<{
         handleDelete(index);
         setModal(-1);
       }
+    } else {
+      handleDelete(index);
+      setModal(-1);
     }
   }
 
@@ -168,35 +171,39 @@ export const BubbleEdit: FC<{
         )}
       </div>
       {/* third level bubble types*/}
-      <div className='flex space-x-2 text-gray-600'>
-        <div className='box justify-start'>
-          <button
-            className={`${type == 'photo' && 'font-bold'}`}
-            onClick={() => setType('photo')}
-            disabled={disabled}
-          >
-            Photo
-          </button>
+      {disabled ? (
+        <h1 className='font-bold text-gray-600'>{type}</h1>
+      ) : (
+        <div className='flex space-x-2 text-gray-600'>
+          <div className='box justify-start'>
+            <button
+              className={`${type == 'photo' && 'font-bold'}`}
+              onClick={() => setType('photo')}
+              disabled={disabled}
+            >
+              Photo
+            </button>
+          </div>
+          <div className='box justify-center'>
+            <button
+              className={`${type == 'link' && 'font-bold'}`}
+              onClick={() => setType('link')}
+              disabled={disabled}
+            >
+              Link
+            </button>
+          </div>
+          <div className='box justify-end'>
+            <button
+              className={`${type == 'paragraph' && 'font-bold'}`}
+              onClick={() => setType('paragraph')}
+              disabled={disabled}
+            >
+              Paragragh
+            </button>
+          </div>
         </div>
-        <div className='box justify-center'>
-          <button
-            className={`${type == 'link' && 'font-bold'}`}
-            onClick={() => setType('link')}
-            disabled={disabled}
-          >
-            Link
-          </button>
-        </div>
-        <div className='box justify-end'>
-          <button
-            className={`${type == 'paragraph' && 'font-bold'}`}
-            onClick={() => setType('paragraph')}
-            disabled={disabled}
-          >
-            Paragragh
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html --out-dir build",
     "clean": "rm -rf .cache dist"
   },
   "keywords": [],

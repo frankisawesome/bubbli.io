@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 interface PersonalDetail {
   photoUrl?: string;
   name: string;
-  email: string;
 }
 
 export const Personal = (props: PersonalDetail) => {
