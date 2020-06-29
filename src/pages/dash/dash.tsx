@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import Firebase from 'firebase';
 import { UserContext } from '../../hooks/useAuth';
 import { Bubbles } from './bubbles';
