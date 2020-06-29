@@ -28,11 +28,8 @@ export const UserDashboard = () => {
   const themeSelection = (
     <div className='w-3/4 flex justify-between'>
       <p className='self-center text-gray-600'>select theme:</p>
-      <div className='w-3/4 flex justify-between my-4'>
+      <div className='w-3/4 flex space-x-4 my-4'>
         <div className='w-12 h-12 rounded-full bg-gray-600'></div>
-        <div className='w-12 h-12 rounded-full bg-red-600'></div>
-        <div className='w-12 h-12 rounded-full bg-orange-600'></div>
-        <div className='w-12 h-12 rounded-full bg-white border'></div>
         <div className='w-12 h-12 rounded-full bg-teal-600'></div>
         <div className='w-12 h-12 rounded-full bg-blue-600'></div>
       </div>
