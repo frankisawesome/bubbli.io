@@ -25,10 +25,25 @@ export const UserDashboard = () => {
     }
   }, [user]);
 
+  const themeSelection = (
+    <div className='w-3/4 flex justify-between'>
+      <p className='self-center text-gray-600'>select theme:</p>
+      <div className='w-3/4 flex justify-between my-4'>
+        <div className='w-12 h-12 rounded-full bg-gray-600'></div>
+        <div className='w-12 h-12 rounded-full bg-red-600'></div>
+        <div className='w-12 h-12 rounded-full bg-orange-600'></div>
+        <div className='w-12 h-12 rounded-full bg-white border'></div>
+        <div className='w-12 h-12 rounded-full bg-teal-600'></div>
+        <div className='w-12 h-12 rounded-full bg-blue-600'></div>
+      </div>
+    </div>
+  );
+
   if (user && hasName) {
     return (
       <div className='page-card-no-border w-5/6 max-w-2xl'>
         <Personal name={user.displayName as string} />
+        {themeSelection}
         <Bubbles user={user} />
       </div>
     );

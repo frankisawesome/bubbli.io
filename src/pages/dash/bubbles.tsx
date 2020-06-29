@@ -190,12 +190,6 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       <button className='btn-alt-2 my-2' onClick={handleAddElement}>
         Create New Bubble
       </button>
-      <a
-        className='btn-alt-2 my-2 text-center'
-        href={`https://bubbli.io/${portfolio?.name}`}
-      >
-        View My Bio
-      </a>
       {saveMessage && <p>{saveMessage}</p>}
     </div>
   );
