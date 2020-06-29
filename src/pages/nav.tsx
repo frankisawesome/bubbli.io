@@ -60,7 +60,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
           {location.pathname === '/settings' && 'Change Settings'}
           {location.pathname === '/' && 'bubbli.io'}
           {location.pathname === '/login' && 'Log In & Register'}
-          {location.pathname === '/about' && 'About'}
+          {location.pathname === '/about' && 'Help'}
         </p>
         <div className='pr-8 lg:hidden'>
           <Link to='/menu'>

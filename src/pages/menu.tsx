@@ -22,22 +22,21 @@ export const Menu = (props: any) => {
       </div>
       <div className='flex flex-col items-center space-y-10 pt-10'>
         <Link className='menu-btn' to='/'>
-          home
-        </Link>
-        <Link className='menu-btn' to='/about'>
-          about
+          bubbli.io
         </Link>
         {user && (
           <>
             <Link className='menu-btn' to='/admin'>
-              admin
+              manage bubbles
             </Link>
             <Link className='menu-btn' to='/settings'>
               settings
             </Link>
           </>
         )}
-
+        <Link className='menu-btn' to='/about'>
+          help
+        </Link>
         {user ? (
           <button className='menu-btn' onClick={handleLogout}>
             logout

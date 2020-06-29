@@ -68,10 +68,10 @@ export const BubbleEdit: FC<{
 
   function changeType(type: 'paragraph' | 'link' | 'photo') {
     handleChange(index, {
-      url: bubble.url,
+      url: bubble.url ? bubble.url : '',
       title: bubble.title,
       type: type,
-      text: bubble.text,
+      text: bubble.text ? bubble.text : '',
     });
   }
 
@@ -84,10 +84,10 @@ export const BubbleEdit: FC<{
         value={bubble.title}
         onChange={(e) =>
           handleChange(index, {
-            url: bubble.url,
+            url: bubble.url ? bubble.url : '',
             title: e.target.value,
             type: bubble.type,
-            text: bubble.text,
+            text: bubble.text ? bubble.text : '',
           })
         }
         onBlur={handleBlur}
@@ -107,7 +107,7 @@ export const BubbleEdit: FC<{
             url: e.target.value,
             title: bubble.title,
             type: bubble.type,
-            text: bubble.text,
+            text: bubble.text ? bubble.text : '',
           })
         }
         onBlur={handleBlur}
@@ -124,7 +124,7 @@ export const BubbleEdit: FC<{
         value={bubble.text}
         onChange={(e) =>
           handleChange(index, {
-            url: bubble.url,
+            url: bubble.url ? bubble.url : '',
             title: bubble.title,
             type: bubble.type,
             text: e.target.value,
