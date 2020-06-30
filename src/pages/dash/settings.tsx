@@ -1,34 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { FirebaseContext } from '../../firebase/Firebase';
-import { UserContext } from '../../hooks/useAuth';
+import React, { useContext } from 'react';
 import { Upload } from '../../components/firebaseUpload';
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
+import { usePhoto } from '../../hooks/usePhoto';
+import { UserContext } from '../../hooks/useAuth';
 export const Settings = () => {
-  const [photoUrl, setPhotoUrl] = useState<string | undefined>(undefined);
-  const firebase = useContext(FirebaseContext);
+  const [photoUrl, handleDeletePhoto] = usePhoto();
   const user = useContext(UserContext);
-
-  function handleDeletePhoto() {
-    firebase.storage
-      .ref(`users/${user?.uid}/profile.jpg`)
-      .delete()
-      .then(() => console.log('deleted'));
-    user?.updateProfile({ photoURL: null }).then(() => setPhotoUrl(undefined));
-  }
-
-  useEffect(() => {
-    if (user?.photoURL) {
-      firebase.storage
-        .ref(`users/${user.uid}/profile.jpg`)
-        .getDownloadURL()
-        .then((url) => setPhotoUrl(url));
-    }
-  }, [user, photoUrl]);
-
   if (user) {
     return (
       <div>
-        {user.photoURL ? (
+        {photoUrl ? (
           <div className='flex flex-col justify-center items-center'>
             <h1 className='font-bold my-4 text-2xl'>Profile Photo</h1>
             <img
@@ -40,7 +21,7 @@ export const Settings = () => {
             </button>
           </div>
         ) : (
-          <Upload setPhotoUrl={setPhotoUrl} />
+          <Upload />
         )}
       </div>
     );

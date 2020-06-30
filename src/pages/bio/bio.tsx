@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import { FirebaseContext } from '../../firebase/Firebase';
 import { Portfolio } from '../dash/bubbles';
 import { BubbleView } from './bubbleView';
+import { usePhoto } from '../../hooks/usePhoto';
 type BioParams = {
   name: string;
 };
@@ -16,6 +17,7 @@ export const Bio: FC<
   const firebase = useContext(FirebaseContext);
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [notFound, setNotFound] = useState(false);
+  const [photoUrl] = usePhoto();
   useEffect(() => {
     firebase.db
       .collection('portfolios')
@@ -34,10 +36,18 @@ export const Bio: FC<
     props.toggleNav(false);
     return () => props.toggleNav(true);
   }, []);
+
   return (
-    <div className='flex flex-col justify-between w-full items-center'>
+    <div className='flex flex-col justify-between w-full items-center pt-4'>
       <div className='w-full items-center flex flex-col'>
-        <div className='w-24 h-24 rounded-full bg-gray-600 mt-6'></div>
+        {photoUrl ? (
+          <img
+            className='w-24 h-24 object-top rounded-full'
+            src={photoUrl}
+          ></img>
+        ) : (
+          <div className='w-24 h-24 rounded-full bg-gray-600 mx-6'></div>
+        )}
         <h1 className='text-2xl my-4'>@{name}</h1>
         {portfolio ? (
           portfolio.bubbles.map((bubble) => (
