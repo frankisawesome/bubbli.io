@@ -3,6 +3,7 @@ import Firebase from 'firebase';
 import { FirebaseContext } from '../../firebase/Firebase';
 import { BubbleEdit } from './bubbleEdit';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Tooltip } from 'react-tippy';
 export interface Portfolio {
   name: string;
   bubbles: Bubble[];
@@ -119,16 +120,23 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <BubbleEdit
-            bubble={bubble}
-            index={i}
-            handleDelete={handleDeleteElement}
-            handleChange={handleOnChange}
-            handleBlur={handleSave}
-            modal={modal}
-            setModal={setModal}
-            isDragging={snapshot.isDragging}
-          />
+          <Tooltip
+            title='Drag me to re-order!'
+            position='top'
+            trigger='mouseenter'
+            theme='light'
+          >
+            <BubbleEdit
+              bubble={bubble}
+              index={i}
+              handleDelete={handleDeleteElement}
+              handleChange={handleOnChange}
+              handleBlur={handleSave}
+              modal={modal}
+              setModal={setModal}
+              isDragging={snapshot.isDragging}
+            />
+          </Tooltip>
         </div>
       )}
     </Draggable>

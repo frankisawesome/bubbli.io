@@ -12,6 +12,7 @@ import { Settings } from './pages/dash/settings';
 import { About } from './pages/about';
 import { Footer } from './pages/footer';
 import { Menu } from './pages/menu';
+import 'react-tippy/dist/tippy.css';
 
 export const App: FC = () => {
   const firebase: Firebase = useContext(FirebaseContext);
