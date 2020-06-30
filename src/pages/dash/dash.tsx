@@ -31,7 +31,7 @@ export const UserDashboard = () => {
       <div className='w-3/4 flex space-x-4 my-4'>
         <div className='w-12 h-12 rounded-full bg-gray-600'></div>
         <div className='w-12 h-12 rounded-full bg-teal-600'></div>
-        <div className='w-12 h-12 rounded-full bg-blue-600'></div>
+        <div className='w-12 h-12 rounded-full bg-pink-600'></div>
       </div>
     </div>
   );

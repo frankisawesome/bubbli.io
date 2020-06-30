@@ -21,7 +21,7 @@ export const Nav: FC<{ show: boolean }> = ({ show }) => {
             home
           </Link>
           <Link to='/about' className='nav-btn'>
-            about
+            help
           </Link>
         </div>
         <div className='lg:box justify-center flex items-center space-x-4'>
