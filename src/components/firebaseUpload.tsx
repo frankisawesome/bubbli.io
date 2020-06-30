@@ -30,7 +30,7 @@ export const Upload: FC<{ setPhotoUrl: (url: string) => void }> = ({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Upload Your Profile Photo</h1>
+        <h1 className='font-bold my-4 text-2xl'>Upload Your Profile Photo</h1>
         <input
           type='file'
           accept='image/png, image/jpeg'

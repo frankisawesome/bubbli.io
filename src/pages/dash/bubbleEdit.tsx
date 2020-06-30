@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Bubble } from './bubbles';
+import { Tooltip } from 'react-tippy';
 
 export const BubbleEdit: FC<{
   bubble: Bubble;
@@ -183,13 +184,20 @@ export const BubbleEdit: FC<{
       ) : (
         <div className='flex space-x-2 text-gray-600'>
           <div className='box justify-start'>
-            <button
-              className={`${bubble.type == 'photo' && 'font-bold'}`}
-              onClick={() => changeType('photo')}
-              disabled={disabled}
+            <Tooltip
+              trigger='mouseenter'
+              title='Sorry, photo is currently not supported in alpha'
+              theme='light'
+              position='top'
             >
-              Photo
-            </button>
+              <button
+                className={`${bubble.type == 'photo' && 'font-bold'}`}
+                onClick={() => changeType('photo')}
+                disabled={true}
+              >
+                Photo
+              </button>
+            </Tooltip>
           </div>
           <div className='box justify-center'>
             <button
@@ -200,6 +208,7 @@ export const BubbleEdit: FC<{
               Link
             </button>
           </div>
+
           <div className='box justify-end'>
             <button
               className={`${bubble.type == 'paragraph' && 'font-bold'}`}

@@ -29,9 +29,15 @@ export const Settings = () => {
     return (
       <div>
         {user.photoURL ? (
-          <div>
-            Your profile photo is: <img src={photoUrl}></img>
-            <button onClick={handleDeletePhoto}>Delete Photo</button>
+          <div className='flex flex-col justify-center items-center'>
+            <h1 className='font-bold my-4 text-2xl'>Profile Photo</h1>
+            <img
+              className='w-24 h-24 object-top rounded-full'
+              src={photoUrl}
+            ></img>
+            <button className='btn my-4' onClick={handleDeletePhoto}>
+              Change Photo
+            </button>
           </div>
         ) : (
           <Upload setPhotoUrl={setPhotoUrl} />
