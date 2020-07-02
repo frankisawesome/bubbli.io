@@ -117,9 +117,9 @@ export const BubbleEdit: FC<{
   );
 
   const paragraphInput = (
-    <div className='max-w-md w-full'>
-      <label>text: </label>
-      <input
+    <div className='max-w-md w-full flex'>
+      <label className='self-center'>text: </label>
+      <textarea
         disabled={disabled}
         className={`my-2 ${disabled ? ' form-input-disabled' : 'form-input'}`}
         value={bubble.text}
@@ -132,7 +132,9 @@ export const BubbleEdit: FC<{
           })
         }
         onBlur={handleBlur}
-      ></input>
+        rows={4}
+        maxLength={400}
+      ></textarea>
     </div>
   );
   return (

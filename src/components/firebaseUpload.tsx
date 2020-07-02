@@ -1,17 +1,9 @@
-import React, {
-  useRef,
-  useContext,
-  FormEvent,
-  FC,
-  SetStateAction,
-  useState,
-  useEffect,
-} from 'react';
+import React, { useRef, useContext, FormEvent, useState, FC } from 'react';
 import { FirebaseContext } from '../firebase/Firebase';
 import { UserContext } from '../hooks/useAuth';
 import { Redirect } from 'react-router';
 
-export const Upload = () => {
+export const Upload: FC<{ filename: string }> = ({ filename }) => {
   const fileInput = useRef<HTMLInputElement>(null);
   const firebase = useContext(FirebaseContext);
   const user = useContext(UserContext);
@@ -33,6 +25,8 @@ export const Upload = () => {
           photoURL: `gs://airbiodotme.appspot.com/users/${user?.uid}/profile.jpg`,
         })
         .then(() => setSuccess(true));
+    } else {
+      window.alert('No file selected!');
     }
   }
   return success ? (
@@ -40,7 +34,6 @@ export const Upload = () => {
   ) : (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1 className='font-bold my-4 text-2xl'>Upload Your Profile Photo</h1>
         <input
           type='file'
           accept='image/png, image/jpeg'

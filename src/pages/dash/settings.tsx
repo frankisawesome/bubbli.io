@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Upload } from '../../components/firebaseUpload';
-import { Redirect, useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 import { usePhoto } from '../../hooks/usePhoto';
 import { UserContext } from '../../hooks/useAuth';
 export const Settings = () => {
@@ -21,7 +21,12 @@ export const Settings = () => {
             </button>
           </div>
         ) : (
-          <Upload />
+          <>
+            <h1 className='font-bold my-4 text-2xl'>
+              Upload Your Profile Photo
+            </h1>
+            <Upload filename='profile' />
+          </>
         )}
       </div>
     );

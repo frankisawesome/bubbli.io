@@ -21,6 +21,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [saveMessage, setSaveMessage] = useState<string | null>();
   const [modal, setModal] = useState(-1);
+  const [recentlySaved, setRecentlySaved] = useState(false);
 
   //fetch portfolio for user on mount
   useEffect(() => {
@@ -37,8 +38,13 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
 
   //saves when bubbles change so delete ops are synced
   useEffect(() => {
-    if (portfolio) {
+    if (portfolio && !recentlySaved) {
       handleSave();
+      //prevents frequent saving when editing paragraphs etc
+      setRecentlySaved(true);
+      setTimeout(() => {
+        setRecentlySaved(false);
+      }, 1000);
     }
   }, [portfolio]);
 
