@@ -105,8 +105,35 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
     });
   }
 
+  function validateLinks() {
+    if (portfolio) {
+      const newBubbles = portfolio.bubbles.map((bubble) => {
+        if (bubble.type !== 'link') {
+          return bubble
+        } else {
+          if (bubble.url.match(/https:/) || bubble.url.match(/http:/)) {
+            return bubble
+          } else {
+            bubble.url = 'https://'.concat(bubble.url)
+            return bubble
+          }
+        }
+      })
+      setPortfolio((prev) => {
+        if (prev) {
+          return {
+            name: prev?.name,
+            bubbles: newBubbles
+          }} else {
+            return null
+          }
+      })
+    }
+  }
+
   function handleSave() {
     if (portfolio) {
+      validateLinks()
       firebase.db
         .collection('portfolios')
         .doc(user.uid)
