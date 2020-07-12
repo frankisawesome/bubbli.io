@@ -4,6 +4,7 @@ import Firebase from 'firebase';
 import { UserContext } from '../../hooks/useAuth';
 import { Bubbles } from './bubbles';
 import { Personal } from './personal';
+import { Themes } from './themes';
 
 export const UserDashboard = () => {
   const user: Firebase.User | null = useContext(UserContext);
@@ -25,22 +26,10 @@ export const UserDashboard = () => {
     }
   }, [user]);
 
-  const themeSelection = (
-    <div className='w-3/4 flex justify-between'>
-      <p className='self-center text-gray-600'>select theme:</p>
-      <div className='w-3/4 flex space-x-4 my-4'>
-        <div className='w-12 h-12 rounded-full bg-gray-600'></div>
-        <div className='w-12 h-12 rounded-full bg-teal-600'></div>
-        <div className='w-12 h-12 rounded-full bg-pink-600'></div>
-      </div>
-    </div>
-  );
-
   if (user && hasName) {
     return (
       <div className='page-card-no-border w-5/6 max-w-2xl'>
         <Personal name={user.displayName as string} />
-        {themeSelection}
         <Bubbles user={user} />
       </div>
     );

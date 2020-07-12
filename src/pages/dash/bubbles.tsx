@@ -4,6 +4,7 @@ import { FirebaseContext } from '../../firebase/Firebase';
 import { BubbleEdit } from './bubbleEdit';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Tooltip } from 'react-tippy';
+import { Themes } from './themes';
 export interface Portfolio {
   name: string;
   bubbles: Bubble[];
@@ -204,6 +205,7 @@ export const Bubbles: FC<{ user: Firebase.User }> = ({ user }) => {
       <button className='btn-alt-2 my-2' onClick={handleAddElement}>
         Create New Bubble
       </button>
+      <Themes />
       {saveMessage && <p>{saveMessage}</p>}
     </div>
   );
